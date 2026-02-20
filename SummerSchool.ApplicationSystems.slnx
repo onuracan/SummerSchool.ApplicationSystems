@@ -3,7 +3,7 @@
     <Project Path="Core/SummerSchool.ApplicationSystems.Core/SummerSchool.ApplicationSystems.Core.csproj" Id="080c3794-bb39-4cbe-9d27-3c52d63b6068" />
   </Folder>
   <Folder Name="/Presentation/">
-    <Project Path="Presentation/SummerSchool.ApplicationSystems.Mvc/SummerSchool.ApplicationSystems.Mvc.csproj" Id="9719212e-d17e-4214-9622-68318102a5b4" />
+    <Project Path="Presentation/SummerSchool.ApplicationSystems.Mvc/SummerSchool.ApplicationSystems.Mvc.csproj" Id="89709e61-36a1-4e9c-b468-6f001237e015" />
     <Project Path="Presentation/SummerSchool.ApplicationSystems.WebApi/SummerSchool.ApplicationSystems.WebApi.csproj" Id="318878f6-5980-45aa-ad18-c37e6f1a8696" />
   </Folder>
   <Folder Name="/Repository/">

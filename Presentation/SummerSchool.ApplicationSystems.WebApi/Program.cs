@@ -1,5 +1,6 @@
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using Serilog;
 using SummerSchool.ApplicationSystems.Repository.Infrastructure;
 using SummerSchool.ApplicationSystems.WebApi.Infrastructure.Extensions;
 using SummerSchool.ApplicationSystems.WebApi.Infrastructure.Middlewares;
@@ -14,6 +15,7 @@ app.Run();
 
 void ServicesSection(IServiceCollection services)
 {
+    services.AddSerilog();
     services.AddControllers().AddCoreJsonOptions().AddApiFluentValidateFilter();
     services.AddApiBehaivorConfigure();
     services.AddCoreFluentValidation<Program>();
@@ -32,6 +34,8 @@ void ServicesSection(IServiceCollection services)
 
 void UseSection(WebApplication app)
 {
+    app.UseSerilogRequestLogging();
+
     if (app.Environment.IsDevelopment())
         app.UseCustomSwagger();
     else

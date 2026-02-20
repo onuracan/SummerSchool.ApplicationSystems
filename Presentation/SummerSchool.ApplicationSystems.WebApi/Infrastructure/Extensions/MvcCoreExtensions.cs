@@ -1,4 +1,5 @@
-﻿using SummerSchool.ApplicationSystems.WebApi.Infrastructure.Filters;
+﻿using Serilog;
+using SummerSchool.ApplicationSystems.WebApi.Infrastructure.Filters;
 using System.Text.Encodings.Web;
 using System.Text.Json.Serialization;
 using System.Text.Unicode;
@@ -21,6 +22,17 @@ public static class MvcCoreExtensions
     public static IMvcBuilder AddApiFluentValidateFilter(this IMvcBuilder builder)
     {
         builder.AddMvcOptions(x => x.Filters.Add<ApiFluentValidateFilterAttribute>());
+        return builder;
+    }
+
+    public static WebApplicationBuilder AddSeriLog(this WebApplicationBuilder builder)
+    {
+        builder.Host.UseSerilog((hostingContext, services, configuration) =>
+        {
+            configuration.ReadFrom.Configuration(hostingContext.Configuration)
+                         .ReadFrom.Services(services)
+                         .Enrich.FromLogContext();
+        });
         return builder;
     }
 }

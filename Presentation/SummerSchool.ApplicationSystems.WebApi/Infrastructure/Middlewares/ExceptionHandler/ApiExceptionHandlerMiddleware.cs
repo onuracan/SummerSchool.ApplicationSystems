@@ -19,7 +19,7 @@ public class ApiExceptionHandlerMiddleware(RequestDelegate next)
         }
         catch (Exception ex)
         {
-            //await this.HandleExceptionAsync(context, ex, actionParams);
+            await this.HandleExceptionAsync(context, ex, actionParams);
 
             context.Response.StatusCode = StatusCodes.Status500InternalServerError;
             context.Response.ContentType = "application/json";
@@ -28,25 +28,16 @@ public class ApiExceptionHandlerMiddleware(RequestDelegate next)
         }
     }
 
-    //private async Task HandleExceptionAsync(HttpContext context, Exception ex, string actionParams)
-    //{
-    //    var errorLogsService = context.RequestServices.GetRequiredService<IErrorLogsService>();
+    private async Task HandleExceptionAsync(HttpContext context, Exception ex, string actionParams)
+    {
+        var logger = context.RequestServices.GetRequiredService<ILogger<ApiExceptionHandlerMiddleware>>();
 
-    //    await errorLogsService.CreateAsync(new()
-    //    {
-    //        AppName = Constants.APP_NAME,
-    //        RequestUrl = context.Request.Path,
-    //        RequestInput = actionParams,
-    //        Message = $"{ex.Message} {ex.InnerException?.Message}",
-    //        StackTrace = JsonSerializer.Serialize($"{ex.StackTrace} {ex.InnerException?.StackTrace}", CommonMethods.GetDefaultJsonSerializerOptions()),
-    //        AppType = Constants.APP_TYPE,
-    //        InsertedDate = DateTime.Now
-    //    });
-    //}
+        logger.LogError(ex, "Unhandled Exception | Path: {Path} | Method: {Method} | RequestBody: {RequestBody}", context.Request.Path, context.Request.Method, actionParams);
+    }
 
     private async Task<string> GetActionParamsFromRequestAsync(HttpContext context)
     {
-        if (context.Request.Method == HttpMethods.Post)
+        if (context.Request.Method == HttpMethods.Post || context.Request.Method == HttpMethods.Put)
         {
             context.Request.EnableBuffering();
             var paramString = await new StreamReader(context.Request.Body).ReadToEndAsync();
