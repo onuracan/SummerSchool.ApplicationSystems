@@ -1,0 +1,6 @@
+@SummerSchool.ApplicationSystems.WebApi_HostAddress = http://localhost:5100
+
+GET {{SummerSchool.ApplicationSystems.WebApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

@@ -1,0 +1,16 @@
+<Solution>
+  <Folder Name="/Core/">
+    <Project Path="Core/SummerSchool.ApplicationSystems.Core/SummerSchool.ApplicationSystems.Core.csproj" Id="080c3794-bb39-4cbe-9d27-3c52d63b6068" />
+  </Folder>
+  <Folder Name="/Presentation/">
+    <Project Path="Presentation/SummerSchool.ApplicationSystems.Mvc/SummerSchool.ApplicationSystems.Mvc.csproj" Id="9719212e-d17e-4214-9622-68318102a5b4" />
+    <Project Path="Presentation/SummerSchool.ApplicationSystems.WebApi/SummerSchool.ApplicationSystems.WebApi.csproj" Id="318878f6-5980-45aa-ad18-c37e6f1a8696" />
+  </Folder>
+  <Folder Name="/Repository/">
+    <Project Path="Repository/SummerSchool.ApplicationSystems.Repository/SummerSchool.ApplicationSystems.Repository.csproj" Id="c2278952-b853-4192-90b5-d860e52c5d13" />
+  </Folder>
+  <Folder Name="/Service/">
+    <Project Path="Service/SummerSchool.ApplicationSystems.Service/SummerSchool.ApplicationSystems.Service.csproj" Id="8e578cae-0670-420e-a1b0-7292e3271dd7" />
+  </Folder>
+  <Folder Name="/Test/" />
+</Solution>
