@@ -173,9 +173,11 @@ namespace SummerSchool.ApplicationSystems.Repository.Migrations
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("ID");
 
-                    b.Property<int>("CountryId")
-                        .HasColumnType("int")
-                        .HasColumnName("COUNTRY_ID");
+                    b.Property<string>("CountryCode")
+                        .IsRequired()
+                        .HasMaxLength(5)
+                        .HasColumnType("nvarchar(5)")
+                        .HasColumnName("COUNTRY_CODE");
 
                     b.Property<string>("Department")
                         .IsRequired()

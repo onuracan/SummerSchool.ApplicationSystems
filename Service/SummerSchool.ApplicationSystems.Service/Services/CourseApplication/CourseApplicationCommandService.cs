@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using SummerSchool.ApplicationSystems.Core.DTOs.Base.Response;
 using SummerSchool.ApplicationSystems.Core.DTOs.CourseApplication.Request;
+using SummerSchool.ApplicationSystems.Core.Enums;
 using SummerSchool.ApplicationSystems.Core.Options;
 using SummerSchool.ApplicationSystems.Core.Repositories.Base;
 using SummerSchool.ApplicationSystems.Core.Services.Course;
@@ -25,16 +27,14 @@ public class CourseApplicationCommandService(IBaseRepository<Entities.CourseAppl
 
     public async Task<ServiceResponseDto> CreateCourseApplicationAsync(CreateCourseApplicationRequestDto request, CancellationToken cancellationToken)
     {
-        if (!this._studentQueryService.Exists(x => x.Id == request.StudentId))
-            return ServiceResponseDto.SetFail(message: "İşlem yapan öğrenci bulunamadı.");
-
-        if (!this._courseQueryService.Exists(x => x.Id == request.CourseId))
-            return ServiceResponseDto.SetFail(message: "Seçilen ders bulunamadı.");
-
-        if (this._repository.Exists(x => x.StudentId == request.StudentId && x.CourseId == request.CourseId))
-            return ServiceResponseDto.SetFail(message: "Başvurulmak istenen derse daha önce başvuru yapılmış.");
+        var response = await this.ValidateCourseApplicationDataAsync(request, cancellationToken).ConfigureAwait(false);
+        if (!response.IsSuccessful)
+            return response;
 
         var entity = this._mapper.Map<Entities.CourseApplication>(request);
+        entity.StudentId = this._userOptions.Id;
+        entity.ApplicationStatus = (int)ApplicationStatus.Application;
+        entity.IsActive = (int)ActiveFlag.Active;
 
         await this._repository.AddAsync(entity, cancellationToken).ConfigureAwait(false);
 
@@ -52,6 +52,29 @@ public class CourseApplicationCommandService(IBaseRepository<Entities.CourseAppl
         entity.UpdatedDate = DateTime.Now;
 
         await this._repository.UpdateAsync(entity, cancellationToken).ConfigureAwait(false);
+
+        return ServiceResponseDto.SetSuccess();
+    }
+
+    private async Task<ServiceResponseDto> ValidateCourseApplicationDataAsync(CreateCourseApplicationRequestDto request, CancellationToken cancellationToken)
+    {
+        if (!this._studentQueryService.Exists(x => x.Id == this._userOptions.Id))
+            return ServiceResponseDto.SetFail(message: "İşlem yapan öğrenci bulunamadı.");
+
+        var responseCourse = await this._courseQueryService.FindAsync(request.CourseId, cancellationToken).ConfigureAwait(false);
+        if (!responseCourse.IsSuccessful)
+        {
+            return ServiceResponseDto.SetFail(message: "Seçilen ders bulunamadı.");
+        }
+        else
+        {
+            var appCount = await this._repository.GetDbSet().CountAsync(x => x.CourseId == request.CourseId, cancellationToken).ConfigureAwait(false);
+            if (appCount + 1 > responseCourse.Result.Quota)
+                return ServiceResponseDto.SetFail(message: "Seçilen dersin kontenjanı dolmuş.");
+        }
+
+        if (this._repository.Exists(x => x.StudentId == this._userOptions.Id && x.CourseId == request.CourseId))
+            return ServiceResponseDto.SetFail(message: "Başvurulmak istenen derse daha önce başvuru yapılmış.");
 
         return ServiceResponseDto.SetSuccess();
     }

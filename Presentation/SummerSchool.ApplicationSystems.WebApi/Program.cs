@@ -5,6 +5,7 @@ using SummerSchool.ApplicationSystems.Core.Options;
 using SummerSchool.ApplicationSystems.Repository.Infrastructure;
 using SummerSchool.ApplicationSystems.Service.Infrastructure.Configurations;
 using SummerSchool.ApplicationSystems.Service.Infrastructure.Extensions;
+using SummerSchool.ApplicationSystems.Service.Validators.Auth;
 using SummerSchool.ApplicationSystems.Shared.Enums;
 using SummerSchool.ApplicationSystems.WebApi.Infrastructure.Extensions;
 using SummerSchool.ApplicationSystems.WebApi.Infrastructure.Middlewares;
@@ -23,7 +24,7 @@ void ServicesSection(IServiceCollection services)
     services.AddSerilog();
     services.AddControllers().AddCoreJsonOptions().AddApiFluentValidateFilter();
     services.AddApiBehaivorConfigure();
-    services.AddCoreFluentValidation<Program>();
+    services.AddCoreFluentValidation<AdminLoginRequestDtoValidator>();
     services.AddHttpContextAccessor();
     services.AddEndpointsApiExplorer();
     if (builder.Environment.IsDevelopment())
@@ -31,6 +32,7 @@ void ServicesSection(IServiceCollection services)
 
     services.AddCustomCors(builder.Configuration);
     services.AddRegisterDbContext(builder.Configuration);
+    services.AddCountryInfoSoap();
     services.AddJwtAuthentication(builder.Configuration);
     services.AddAutoMapper();
 
@@ -47,8 +49,9 @@ void ServicesSection(IServiceCollection services)
         if (identity != null && identity.IsAuthenticated)
         {
             userOptions.Id = Guid.Parse(identity.FindFirst("Id").Value);
-            userOptions.UserName = identity.FindFirst("UserName").Value;
-            userOptions.UserType = (UserType)int.Parse(identity.FindFirst("UserType").Value);
+            userOptions.UserName = identity.FindFirst("UserName")?.Value;
+            Enum.TryParse<UserType>(identity.FindFirst("UserType").Value, out var userType);
+            userOptions.UserType = userType;
         }
 
         return userOptions;
@@ -69,5 +72,6 @@ void UseSection(WebApplication app)
     app.UseApiExceptionHandler();
     app.UseCors("AllowAll");
     app.UseAuthentication();
+    app.UseAuthorization();
     app.MapControllers();
 }

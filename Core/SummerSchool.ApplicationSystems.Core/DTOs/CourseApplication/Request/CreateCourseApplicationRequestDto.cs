@@ -2,7 +2,5 @@
 
 public class CreateCourseApplicationRequestDto
 {
-    public Guid? StudentId { get; set; }
-    public Guid? CourseId { get; set; }
-    public int? ApplicationStatus { get; set; }
+    public Guid CourseId { get; set; }
 }

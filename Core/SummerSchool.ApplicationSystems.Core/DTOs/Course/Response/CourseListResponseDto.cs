@@ -9,4 +9,6 @@ public class CourseListResponseDto : BaseDto
     public string Department { get; set; }
     public string Faculty { get; set; }
     public int Quota { get; set; }
+    public int ApplicationCount { get; set; }
+    public bool CanBeApply { get; set; }
 }

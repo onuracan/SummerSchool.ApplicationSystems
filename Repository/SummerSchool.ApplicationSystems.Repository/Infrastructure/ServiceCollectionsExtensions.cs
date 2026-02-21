@@ -1,7 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using SummerSchool.ApplicationSystems.Core.Repositories.CountryInfo;
 using SummerSchool.ApplicationSystems.Repository.Context;
+using SummerSchool.ApplicationSystems.Repository.Repositories;
 using System.Reflection;
 
 namespace SummerSchool.ApplicationSystems.Repository.Infrastructure;
@@ -18,5 +20,10 @@ public static class ServiceCollectionsExtensions
             });
             x.UseLazyLoadingProxies(false);
         });
+    }
+
+    public static void AddCountryInfoSoap(this IServiceCollection services)
+    {
+        services.AddScoped<ICountryInfoRepository, CountryInfoSoapRepository>();
     }
 }

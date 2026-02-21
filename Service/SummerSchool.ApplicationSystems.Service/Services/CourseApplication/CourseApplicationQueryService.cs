@@ -50,12 +50,9 @@ public class CourseApplicationQueryService(IBaseRepository<Entities.CourseApplic
 
         var list = await query.Select(x => new CourseApplicationListResponseDto()
         {
-            StudentInfo = $"{x.Student.FirstName} {x.Student.LastName}",
-            CourseInfo = $"{x.Course.Code} ({x.Course.Name})",
+            CourseInfo = $"{x.Course.Code} - {x.Course.Name}",
             ApplicationStatusInfo = ((ApplicationStatus)x.ApplicationStatus).GetDescription(),
             ApplicationStatusDescription = x.ApplicationStatusDescription,
-            UpdatedUser = x.UpdatedUser,
-            UpdatedDate = x.UpdatedDate.Value
         }).ToListAsync(cancellationToken).ConfigureAwait(false);
 
         return ServiceResponseDto<IEnumerable<CourseApplicationListResponseDto>>.SetSuccess(list);

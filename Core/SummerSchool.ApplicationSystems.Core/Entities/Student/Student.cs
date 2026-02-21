@@ -12,7 +12,7 @@ public class Student : BaseEntity
     public string Faculty { get; set; }
     public string PhoneNumber { get; set; }
     public string EMail { get; set; }
-    public int CountryId { get; set; }
+    public string CountryCode { get; set; }
 
     public virtual ICollection<CourseApplication> CourseApplications { get; set; }
 }

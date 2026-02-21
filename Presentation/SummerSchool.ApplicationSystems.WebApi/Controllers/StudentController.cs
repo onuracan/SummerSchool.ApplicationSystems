@@ -17,12 +17,12 @@ public class StudentController(IStudentQueryService studentQueryService,
     private readonly IStudentQueryService _studentQueryService = studentQueryService;
     private readonly IStudentCommandService _studentCommandService = studentCommandService;
 
-    [HttpGet("student/{id}")]
+    [HttpGet("student")]
     [ProducesResponseType((int)HttpStatusCode.OK)]
     [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
-    public async Task<IActionResult> GetById([FromRoute] Guid id, CancellationToken cancellationToken)
+    public async Task<IActionResult> Get(CancellationToken cancellationToken)
     {
-        var response = await this._studentQueryService.GetById(id, cancellationToken).ConfigureAwait(false);
+        var response = await this._studentQueryService.GetById(cancellationToken).ConfigureAwait(false);
 
         return this.CreateJsonResponse(response);
     }

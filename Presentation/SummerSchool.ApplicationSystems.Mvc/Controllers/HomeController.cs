@@ -1,32 +1,34 @@
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using SummerSchool.ApplicationSystems.Mvc.Models;
-using System.Diagnostics;
+using SummerSchool.ApplicationSystems.Mvc.Common.Constants;
+using SummerSchool.ApplicationSystems.Mvc.Models.CountryInfo.Response;
+using SummerSchool.ApplicationSystems.Mvc.Models.Home;
+using SummerSchool.ApplicationSystems.Mvc.Models.Student.Response;
 
-namespace SummerSchool.ApplicationSystems.Mvc.Controllers
+namespace SummerSchool.ApplicationSystems.Mvc.Controllers;
+
+[Authorize]
+public class HomeController(IHttpContextAccessor httpContextAccessor,
+                            IHttpClientFactory httpClientFactory) : BaseController(httpContextAccessor, httpClientFactory)
 {
-    public class HomeController : Controller
+    [HttpGet(RouteConstants.HOME_INDEX)]
+    public async Task<IActionResult> Index()
     {
-        private readonly ILogger<HomeController> _logger;
+        var model = new HomeViewModel();
 
-        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
-        }
+        var responseStudent = await this.GetApiRequestAsync<StudentViewModel>(ApiEndpoints.GET_STUDENT).ConfigureAwait(false);
+        if (!responseStudent.IsSuccessful)
+            ViewBag.Response = responseStudent;
 
-        public IActionResult Index()
-        {
-            return View();
-        }
+        model.Student = responseStudent.Result ?? new StudentViewModel();
+        ViewBag.DisableOtherPages = responseStudent.IsSuccessful;
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
+        var responseCountries = await this.GetApiRequestAsync<IEnumerable<CountryCodeAndNameResponseViewModel>>(ApiEndpoints.GET_COUNTRIES).ConfigureAwait(false);
+        if (!responseCountries.IsSuccessful)
+            ViewBag.Response = responseCountries;
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
+        model.Student.CountryCodeAndNameList = responseCountries.Result ?? new List<CountryCodeAndNameResponseViewModel>().AsEnumerable();
+
+        return View(model);
     }
 }

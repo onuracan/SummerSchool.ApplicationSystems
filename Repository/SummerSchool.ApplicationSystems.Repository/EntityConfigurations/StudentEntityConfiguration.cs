@@ -21,7 +21,7 @@ public class StudentEntityConfiguration : IEntityTypeConfiguration<Student>
         builder.Property(x => x.Faculty).HasColumnName("FACULTY").IsRequired().HasMaxLength(200);
         builder.Property(x => x.PhoneNumber).HasColumnName("PHONE_NUMBER").IsRequired().HasMaxLength(20);
         builder.Property(x => x.EMail).HasColumnName("EMAIL").IsRequired().HasMaxLength(200);
-        builder.Property(x => x.CountryId).HasColumnName("COUNTRY_ID").IsRequired();
+        builder.Property(x => x.CountryCode).HasColumnName("COUNTRY_CODE").HasMaxLength(5).IsRequired();
         builder.Property(x => x.IsActive).HasColumnName("IS_ACTIVE").IsRequired();
         
         builder.HasMany(x => x.CourseApplications).WithOne(x => x.Student).HasForeignKey(x => x.StudentId).OnDelete(DeleteBehavior.Restrict);
