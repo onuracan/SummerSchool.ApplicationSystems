@@ -71,7 +71,44 @@ void UseSection(WebApplication app)
     app.UseAuthentication();
     app.UseAuthorization();
 
-    app.MapControllerRoute(
-        name: "default",
-        pattern: "{controller=Home}/{action=Index}/{id?}");
+    app.Use(async (context, next) =>
+    {
+        if (context.Request.Path == "/")
+        {
+            if (context.User.Identity.IsAuthenticated)
+            {
+                var userType = context.User.FindFirst("UserType")?.Value;
+                if (userType == "Admin")
+                {
+                    context.Response.Redirect(RouteConstants.ADMIN_INDEX);
+                }
+                else
+                {
+                    context.Response.Redirect(RouteConstants.HOME_INDEX);
+                }
+            }
+            else
+            {
+                context.Response.Redirect(RouteConstants.AUTH_LOGIN);
+            }
+            return;
+        }
+        await next();
+    });
+
+
+    app.UseEndpoints(endpoints =>
+    {
+        endpoints.MapControllerRoute(
+          name: "areas",
+          pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+        );
+
+        endpoints.MapControllerRoute(
+           name: "default",
+           pattern: "{controller=Home}/{action=Index}/{id?}"
+        );
+    });
+
+
 }

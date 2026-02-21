@@ -5,7 +5,7 @@ using SummerSchool.ApplicationSystems.Mvc.Models.Student.Request;
 
 namespace SummerSchool.ApplicationSystems.Mvc.Controllers;
 
-[Authorize]
+[Authorize(AuthenticationSchemes = CookieAuthenticationConstants.STUDENT_SCHEME)]
 public class StudentController(IHttpContextAccessor httpContextAccessor,
                             IHttpClientFactory httpClientFactory) : BaseController(httpContextAccessor, httpClientFactory)
 {

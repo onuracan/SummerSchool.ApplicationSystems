@@ -1,0 +1,61 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yaz Okulu Ders Başvuru Sistemi - Yönetici Paneli</title>
+
+    <link href="~/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="~/css/animate.css" rel="stylesheet">
+    <link href="~/css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/plugins/toastr/toastr.min.css">
+</head>
+
+<body class="gray-bg">
+    <div class="loginColumns animated fadeInDown">
+        <div class="row">
+            <div class="col-md-6">
+                <img src="https://halic.edu.tr/wp-content/uploads/2025/06/25/halic_universitesi_logo.svg" />
+            </div>
+            <div class="col-md-6">
+                <div class="ibox-content">
+                    @Html.AntiForgeryToken()
+                    <div class="form-group d-flex justify-content-center">
+                        <h2 class="font-bold">Yönetici Girişi</h2>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="txtUserName" name="userName" placeholder="Kullanıcı Adınız" required="">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" id="txtPassword" name="password" placeholder="Şifreniz" required="">
+                    </div>
+                    <div>
+                        <button id="btnLogin" class="btn btn-primary block full-width m-b">Giriş Yap</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-md-6">
+                Copyright Haliç Üniversitesi
+            </div>
+            <div class="col-md-6 text-right">
+                <small>© 2026</small>
+            </div>
+        </div>
+    </div>
+
+    <script src="~/js/jquery-3.1.1.min.js"></script>
+    <script src="~/js/plugins/toastr/toastr.min.js"></script>
+    <script src="~/js/pages/base.js"></script>
+    <script src="~/js/pages/admin/auth.js"></script>
+</body>
+
+</html>
