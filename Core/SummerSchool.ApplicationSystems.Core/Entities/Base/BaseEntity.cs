@@ -3,4 +3,5 @@
 public class BaseEntity
 {
     public Guid Id { get; set; }
+    public int IsActive { get; set; }
 }

@@ -1,6 +1,7 @@
 <Solution>
   <Folder Name="/Core/">
     <Project Path="Core/SummerSchool.ApplicationSystems.Core/SummerSchool.ApplicationSystems.Core.csproj" Id="080c3794-bb39-4cbe-9d27-3c52d63b6068" />
+    <Project Path="Core/SummerSchool.ApplicationSystems.Shared/SummerSchool.ApplicationSystems.Shared.csproj" Id="4b15868d-22ae-41f5-8a76-cc9b57705baa" />
   </Folder>
   <Folder Name="/Presentation/">
     <Project Path="Presentation/SummerSchool.ApplicationSystems.Mvc/SummerSchool.ApplicationSystems.Mvc.csproj" Id="89709e61-36a1-4e9c-b468-6f001237e015" />

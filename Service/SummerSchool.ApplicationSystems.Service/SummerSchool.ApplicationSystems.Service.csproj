@@ -6,7 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Mappings\" />
     <Folder Include="Validators\" />
   </ItemGroup>
 
@@ -17,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Core\SummerSchool.ApplicationSystems.Core\SummerSchool.ApplicationSystems.Core.csproj" />
+    <ProjectReference Include="..\..\Repository\SummerSchool.ApplicationSystems.Repository\SummerSchool.ApplicationSystems.Repository.csproj" />
   </ItemGroup>
 
 </Project>

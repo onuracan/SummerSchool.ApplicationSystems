@@ -9,6 +9,10 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.24">
+		  <PrivateAssets>all</PrivateAssets>
+		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
 		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.23.0" />
 		<PackageReference Include="Serilog.AspNetCore" Version="8.0.3" />
 		<PackageReference Include="Serilog.Settings.Configuration" Version="8.0.4" />
@@ -22,6 +26,7 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\..\Core\SummerSchool.ApplicationSystems.Core\SummerSchool.ApplicationSystems.Core.csproj" />
+	  <ProjectReference Include="..\..\Core\SummerSchool.ApplicationSystems.Shared\SummerSchool.ApplicationSystems.Shared.csproj" />
 	  <ProjectReference Include="..\..\Repository\SummerSchool.ApplicationSystems.Repository\SummerSchool.ApplicationSystems.Repository.csproj" />
 	  <ProjectReference Include="..\..\Service\SummerSchool.ApplicationSystems.Service\SummerSchool.ApplicationSystems.Service.csproj" />
 	</ItemGroup>

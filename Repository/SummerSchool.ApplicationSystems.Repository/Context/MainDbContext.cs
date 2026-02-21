@@ -1,11 +1,17 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
+using SummerSchool.ApplicationSystems.Core.Entities;
 using System.Reflection;
 
 namespace SummerSchool.ApplicationSystems.Repository.Context;
 
 public class MainDbContext : DbContext
 {
+    public virtual DbSet<Student> Students { get; set; }
+    public virtual DbSet<Course> Courses { get; set; }
+    public virtual DbSet<CourseApplication> CourseApplications { get; set; }
+    public virtual DbSet<OtpVerification> OtpVerifications { get; set; }
+
     public MainDbContext(DbContextOptions<MainDbContext> options) : base(options)
     {
         this.ChangeTracker.AutoDetectChangesEnabled = false;
