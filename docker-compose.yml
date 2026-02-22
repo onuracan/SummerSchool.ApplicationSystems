@@ -1,0 +1,69 @@
+version: '3.8'
+
+services:
+  webapi:
+    build:
+      context: .
+      dockerfile: Presentation/SummerSchool.ApplicationSystems.WebApi/Dockerfile
+    container_name: summerschool-api
+    ports:
+      - "8081:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_URLS=http://+:8080
+      - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=SummerSchoolDb;User Id=sa;Password=YourStrong@Password;TrustServerCertificate=True;
+      - JwtIssuerSettings__Issuer=SummerSchoolApi
+      - JwtIssuerSettings__Audience=SummerSchoolClient
+      - JwtIssuerSettings__Secret=YourSuperSecretKeyMinimum32Characters!
+      - JwtIssuerSettings__ExpirationMinutes=30
+    depends_on:
+      sqlserver:
+        condition: service_healthy
+    networks:
+      - summerschool-network
+    restart: unless-stopped
+
+  mvc:
+    build:
+      context: .
+      dockerfile: Presentation/SummerSchool.ApplicationSystems.Mvc/Dockerfile
+    container_name: summerschool-mvc
+    ports:
+      - "8080:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_URLS=http://+:8080
+      - ApiUrl=http://webapi:8080
+    depends_on:
+      - webapi
+    networks:
+      - summerschool-network
+    restart: unless-stopped
+
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: summerschool-sqlserver
+    ports:
+      - "1433:1433"
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=1
+      - MSSQL_PID=Developer
+    volumes:
+      - sqlserver-data:/var/opt/mssql
+    networks:
+      - summerschool-network
+    restart: unless-stopped
+    healthcheck:
+      test: /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P YourStrong@Password -Q "SELECT 1" || exit 1
+      interval: 10s
+      timeout: 3s
+      retries: 10
+      start_period: 10s
+
+networks:
+  summerschool-network:
+    driver: bridge
+
+volumes:
+  sqlserver-data:
