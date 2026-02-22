@@ -68,7 +68,7 @@ public class CourseApplicationCommandService(IBaseRepository<Entities.CourseAppl
         else
         {
             var appCount = await this._repository.GetDbSet().CountAsync(x => x.CourseId == request.CourseId && x.ApplicationStatus == (int)ApplicationStatus.Acceptance, cancellationToken).ConfigureAwait(false);
-            if (appCount + 1 > responseCourse.Result.Quota)
+            if (appCount > responseCourse.Result.Quota)
                 return ServiceResponseDto.SetFail(message: "Seçilen dersin kontenjanı dolmuş.");
         }
 

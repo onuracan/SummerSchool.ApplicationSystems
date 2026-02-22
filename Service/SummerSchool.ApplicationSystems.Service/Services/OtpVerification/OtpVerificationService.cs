@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Castle.Core.Logging;
 using Microsoft.Extensions.Logging;
 using SummerSchool.ApplicationSystems.Core.Constants;
 using SummerSchool.ApplicationSystems.Core.DTOs.Base.Response;

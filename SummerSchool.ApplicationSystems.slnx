@@ -13,5 +13,8 @@
   <Folder Name="/Service/">
     <Project Path="Service/SummerSchool.ApplicationSystems.Service/SummerSchool.ApplicationSystems.Service.csproj" Id="8e578cae-0670-420e-a1b0-7292e3271dd7" />
   </Folder>
+  <Folder Name="/Solution Items/">
+    <File Path="Readme.md" />
+  </Folder>
   <Folder Name="/Test/" />
 </Solution>

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using System.Reflection;
 using System.Text;
 
 namespace SummerSchool.ApplicationSystems.WebApi.Infrastructure.Extensions;
@@ -60,7 +61,23 @@ public static class ServiceCollectionExtensions
     {
         services.AddSwaggerGen(x =>
         {
-            x.SwaggerDoc("v1", new OpenApiInfo() { Title = "SummerSchool.ApplicationSystems.WebApi", Version = "v1" });
+            x.SwaggerDoc("v1", new OpenApiInfo()
+            {
+                Title = "Yaz Okulu Ders Başvuru API",
+                Version = "v1",
+                Description = "Yaz okulu kapsamında açılan derslere öğrencilerin başvuru yapabildiği ve yöneticilerin başvuruları yönetebildiği API",
+                Contact = new OpenApiContact
+                {
+                    Name = "Onur Acan",
+                    Email = "onur.acan@hotmail.com",
+                    Url = new Uri("https://github.com/onuracan")
+                }
+            });
+
+            var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+            var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+            x.IncludeXmlComments(xmlPath);
+
             x.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
             {
                 Name = "Authorization",

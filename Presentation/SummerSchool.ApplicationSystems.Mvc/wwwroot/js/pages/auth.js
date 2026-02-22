@@ -31,13 +31,11 @@ function login() {
 
     var response = ajaxPostWithResponse('/Auth/Login', JSON.stringify(phoneNumber), 'json', false, null, getDefaultAjaxHeaders());
     if (response.IsSuccessful) {
-        if (!phoneNumberParam) {
-            messageBox("Giriş başarılı! Yönlendiriliyorsunuz...");
+        messageBox("Giriş başarılı! Yönlendiriliyorsunuz...");
 
-            setTimeout(() => {
-                window.location.replace("/Home/Index");
-            }, 500);
-        }
+        setTimeout(() => {
+            window.location.replace("/Home/Index");
+        }, 500);
     }
     else {
         messageBoxError(response.Message || "Giriş yapılırken bir hata oluştu.");
