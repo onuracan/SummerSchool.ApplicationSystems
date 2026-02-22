@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using SummerSchool.ApplicationSystems.Mvc.Areas.Admin.Common.Constants;
 using SummerSchool.ApplicationSystems.Mvc.Common.Constants;
 using SummerSchool.ApplicationSystems.Mvc.Models.Base.Response;
 using SummerSchool.ApplicationSystems.Shared.Enums;
@@ -70,26 +71,26 @@ public class BaseAdminController : Controller
 
         if (context.HttpContext.User.Identity.IsAuthenticated)
         {
-            if (context.HttpContext.Request.Path.Value != RouteConstants.ADMIN_LOGOUT && this.UserInfo.Expiration < DateTime.Now)
+            if (context.HttpContext.Request.Path.Value != AdminRouteConstants.LOGOUT && this.UserInfo.Expiration < DateTime.Now)
             {
-                context.Result = new RedirectResult(RouteConstants.ADMIN_LOGOUT);
+                context.Result = new RedirectResult(AdminRouteConstants.LOGOUT);
                 return;
             }
 
-            if (context.HttpContext.Request.Path.Value == RouteConstants.ADMIN_LOGIN && this.UserInfo.Expiration > DateTime.Now)
+            if (context.HttpContext.Request.Path.Value == AdminRouteConstants.LOGIN && this.UserInfo.Expiration > DateTime.Now)
             {
                 context.Result = new RedirectResult("/");
                 return;
             }
 
-            if (context.HttpContext.Request.Path.Value != RouteConstants.ADMIN_LOGOUT)
+            if (context.HttpContext.Request.Path.Value != AdminRouteConstants.LOGOUT)
                 ViewBag.UserInfo = this.UserInfo;
         }
         else
         {
-            if (context.HttpContext.Request.Path.Value == RouteConstants.ADMIN_LOGOUT)
+            if (context.HttpContext.Request.Path.Value == AdminRouteConstants.LOGOUT)
             {
-                context.Result = new RedirectResult(RouteConstants.ADMIN_LOGIN);
+                context.Result = new RedirectResult(AdminRouteConstants.LOGIN);
                 return;
             }
 

@@ -1,5 +1,6 @@
 using Serilog;
 using SummerSchool.ApplicationSystems.Mvc.Common.Constants;
+using SummerSchool.ApplicationSystems.Mvc.Areas.Admin.Common.Constants;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,14 +22,14 @@ void ServicesSection(IServiceCollection services)
         x.DefaultRequestHeaders.Add("Accept", "application/json");
     });
 
-    services.AddAuthentication(CookieAuthenticationConstants.STUDENT_SCHEME)
-        .AddCookie(CookieAuthenticationConstants.STUDENT_SCHEME, options =>
+    services.AddAuthentication(StudentCookieConstants.SCHEME)
+        .AddCookie(StudentCookieConstants.SCHEME, options =>
         {
-            options.Cookie.Name = CookieAuthenticationConstants.STUDENT_COOKIE_NAME;
-            options.LoginPath = RouteConstants.AUTH_LOGIN;
-            options.LogoutPath = RouteConstants.AUTH_LOGOUT;
-            options.AccessDeniedPath = RouteConstants.ACCESS_DENIED;
-            options.Cookie.Path = CookieAuthenticationConstants.STUDENT_COOKIE_PATH;
+            options.Cookie.Name = StudentCookieConstants.COOKIE_NAME;
+            options.LoginPath = StudentRouteConstants.AUTH_LOGIN;
+            options.LogoutPath = StudentRouteConstants.AUTH_LOGOUT;
+            options.AccessDeniedPath = StudentRouteConstants.ACCESS_DENIED;
+            options.Cookie.Path = StudentCookieConstants.COOKIE_PATH;
             options.Cookie.HttpOnly = true;
             options.Cookie.SameSite = SameSiteMode.None;
             options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
@@ -36,13 +37,13 @@ void ServicesSection(IServiceCollection services)
             options.SlidingExpiration = true;
             options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
         })
-        .AddCookie(CookieAuthenticationConstants.ADMIN_SCHEME, options =>
+        .AddCookie(AdminCookieConstants.SCHEME, options =>
         {
-            options.Cookie.Name = CookieAuthenticationConstants.ADMIN_COOKIE_NAME;
-            options.LoginPath = RouteConstants.ADMIN_LOGIN;
-            options.LogoutPath = RouteConstants.ADMIN_LOGOUT;
-            options.AccessDeniedPath = RouteConstants.ADMIN_ACCESS_DENIED;
-            options.Cookie.Path = CookieAuthenticationConstants.ADMIN_COOKIE_PATH;
+            options.Cookie.Name = AdminCookieConstants.COOKIE_NAME;
+            options.LoginPath = AdminRouteConstants.LOGIN;
+            options.LogoutPath = AdminRouteConstants.LOGOUT;
+            options.AccessDeniedPath = AdminRouteConstants.ACCESS_DENIED;
+            options.Cookie.Path = AdminCookieConstants.COOKIE_PATH;
             options.Cookie.HttpOnly = true;
             options.Cookie.SameSite = SameSiteMode.None;
             options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
@@ -95,16 +96,16 @@ void UseSection(WebApplication app)
                 var userType = context.User.FindFirst("UserType")?.Value;
                 if (userType == "Admin")
                 {
-                    context.Response.Redirect(RouteConstants.ADMIN_INDEX);
+                    context.Response.Redirect(AdminRouteConstants.INDEX);
                 }
                 else
                 {
-                    context.Response.Redirect(RouteConstants.HOME_INDEX);
+                    context.Response.Redirect(StudentRouteConstants.HOME_INDEX);
                 }
             }
             else
             {
-                context.Response.Redirect(RouteConstants.AUTH_LOGIN);
+                context.Response.Redirect(StudentRouteConstants.AUTH_LOGIN);
             }
             return;
         }

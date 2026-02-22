@@ -68,26 +68,26 @@ public class BaseController : Controller
 
         if (context.HttpContext.User.Identity.IsAuthenticated)
         {
-            if (context.HttpContext.Request.Path.Value != RouteConstants.AUTH_LOGOUT && this.UserInfo.Expiration < DateTime.Now)
+            if (context.HttpContext.Request.Path.Value != StudentRouteConstants.AUTH_LOGOUT && this.UserInfo.Expiration < DateTime.Now)
             {
-                context.Result = new RedirectResult(RouteConstants.AUTH_LOGOUT);
+                context.Result = new RedirectResult(StudentRouteConstants.AUTH_LOGOUT);
                 return;
             }
 
-            if (context.HttpContext.Request.Path.Value == RouteConstants.AUTH_LOGIN && this.UserInfo.Expiration > DateTime.Now)
+            if (context.HttpContext.Request.Path.Value == StudentRouteConstants.AUTH_LOGIN && this.UserInfo.Expiration > DateTime.Now)
             {
                 context.Result = new RedirectResult("/");
                 return;
             }
 
-            if (context.HttpContext.Request.Path.Value != RouteConstants.AUTH_LOGOUT)
+            if (context.HttpContext.Request.Path.Value != StudentRouteConstants.AUTH_LOGOUT)
                 ViewBag.UserInfo = this.UserInfo;
         }
         else
         {
-            if (context.HttpContext.Request.Path.Value == RouteConstants.AUTH_LOGOUT)
+            if (context.HttpContext.Request.Path.Value == StudentRouteConstants.AUTH_LOGOUT)
             {
-                context.Result = new RedirectResult(RouteConstants.AUTH_LOGIN);
+                context.Result = new RedirectResult(StudentRouteConstants.AUTH_LOGIN);
                 return;
             }
 

@@ -4,7 +4,6 @@ using SummerSchool.ApplicationSystems.Mvc.Common.Constants;
 using SummerSchool.ApplicationSystems.Mvc.Models.CountryInfo.Response;
 using SummerSchool.ApplicationSystems.Mvc.Models.Home;
 using SummerSchool.ApplicationSystems.Mvc.Models.Student.Response;
-using static SummerSchool.ApplicationSystems.Mvc.Common.Constants.RouteConstants;
 
 namespace SummerSchool.ApplicationSystems.Mvc.Controllers;
 
@@ -12,19 +11,19 @@ namespace SummerSchool.ApplicationSystems.Mvc.Controllers;
 public class HomeController(IHttpContextAccessor httpContextAccessor,
                             IHttpClientFactory httpClientFactory) : BaseController(httpContextAccessor, httpClientFactory)
 {
-    [HttpGet(RouteConstants.HOME_INDEX)]
+    [HttpGet(StudentRouteConstants.HOME_INDEX)]
     public async Task<IActionResult> Index()
     {
         var model = new HomeViewModel();
 
-        var responseStudent = await this.GetApiRequestAsync<StudentViewModel>($"{ApiEndpoints.GET_STUDENT}?id={this.UserInfo.Id.ToString()}").ConfigureAwait(false);
+        var responseStudent = await this.GetApiRequestAsync<StudentViewModel>($"{StudentApiEndpoints.GET_STUDENT}?id={this.UserInfo.Id.ToString()}").ConfigureAwait(false);
         if (!responseStudent.IsSuccessful)
             ViewBag.Response = responseStudent;
 
         model.Student = responseStudent.Result ?? new StudentViewModel();
         ViewBag.DisableOtherPages = responseStudent.IsSuccessful;
 
-        var responseCountries = await this.GetApiRequestAsync<IEnumerable<CountryCodeAndNameResponseViewModel>>(ApiEndpoints.GET_COUNTRIES).ConfigureAwait(false);
+        var responseCountries = await this.GetApiRequestAsync<IEnumerable<CountryCodeAndNameResponseViewModel>>(StudentApiEndpoints.GET_COUNTRIES).ConfigureAwait(false);
         if (!responseCountries.IsSuccessful)
             ViewBag.Response = responseCountries;
 

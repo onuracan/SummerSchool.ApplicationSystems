@@ -11,7 +11,7 @@ public class ErrorController(ILogger<ErrorController> logger) : Controller
 {
     private readonly ILogger<ErrorController> _logger = logger;
 
-    [HttpGet(RouteConstants.ERROR)]
+    [HttpGet(StudentRouteConstants.ERROR)]
     public IActionResult Handler(int statusCode)
     {
         HttpContext.Response.StatusCode = statusCode;

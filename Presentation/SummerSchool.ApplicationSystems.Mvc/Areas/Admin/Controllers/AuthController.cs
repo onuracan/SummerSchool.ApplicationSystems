@@ -1,11 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using SummerSchool.ApplicationSystems.Mvc.Areas.Admin.Common.Constants;
 using SummerSchool.ApplicationSystems.Mvc.Areas.Admin.Models.Auth;
-using SummerSchool.ApplicationSystems.Mvc.Common.Constants;
 using SummerSchool.ApplicationSystems.Shared.Models;
 using System.Security.Claims;
-using static SummerSchool.ApplicationSystems.Mvc.Common.Constants.RouteConstants;
 
 namespace SummerSchool.ApplicationSystems.Mvc.Areas.Admin.Controllers;
 
@@ -14,23 +13,23 @@ namespace SummerSchool.ApplicationSystems.Mvc.Areas.Admin.Controllers;
 public class AuthController(IHttpContextAccessor httpContextAccessor,
                             IHttpClientFactory httpClientFactory) : BaseAdminController(httpContextAccessor, httpClientFactory)
 {
-    [HttpGet(RouteConstants.ADMIN_LOGIN)]
+    [HttpGet(AdminRouteConstants.LOGIN)]
     public IActionResult Login()
     {
         return View();
     }
 
     [ValidateAntiForgeryToken]
-    [HttpPost(RouteConstants.ADMIN_LOGIN)]
+    [HttpPost(AdminRouteConstants.LOGIN)]
     public async Task<JsonResult> Login([FromBody] AdminLoginRequestViewModel request)
     {
-        var response = await this.PostApiRequestAsync<UserModel>(ApiEndpoints.AUTH_ADMIN_LOGIN, request).ConfigureAwait(false);
+        var response = await this.PostApiRequestAsync<UserModel>(AdminApiEndpoints.AUTH_LOGIN, request).ConfigureAwait(false);
         if (!response.IsSuccessful)
             return Json(response);
 
         var claims = this.GetUserClaims(response.Result);
 
-        var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationConstants.ADMIN_SCHEME);
+        var claimsIdentity = new ClaimsIdentity(claims, AdminCookieConstants.SCHEME);
 
         var properties = new AuthenticationProperties()
         {
@@ -39,21 +38,21 @@ public class AuthController(IHttpContextAccessor httpContextAccessor,
             ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(30)
         };
 
-        await HttpContext.SignInAsync(CookieAuthenticationConstants.ADMIN_SCHEME, new ClaimsPrincipal(claimsIdentity), properties);
+        await HttpContext.SignInAsync(AdminCookieConstants.SCHEME, new ClaimsPrincipal(claimsIdentity), properties);
 
         return Json(response);
     }
 
-    [HttpGet(RouteConstants.ADMIN_LOGOUT)]
+    [HttpGet(AdminRouteConstants.LOGOUT)]
     public async Task<IActionResult> Logout()
     {
-        await HttpContext.SignOutAsync(CookieAuthenticationConstants.ADMIN_SCHEME);
+        await HttpContext.SignOutAsync(AdminCookieConstants.SCHEME);
 
         Response.Cookies.Delete(
-            CookieAuthenticationConstants.ADMIN_COOKIE_NAME,
+            AdminCookieConstants.COOKIE_NAME,
             new CookieOptions
             {
-                Path = CookieAuthenticationConstants.ADMIN_COOKIE_PATH,
+                Path = AdminCookieConstants.COOKIE_PATH,
                 HttpOnly = true,
                 SameSite = SameSiteMode.None,
                 Secure = true,
@@ -61,10 +60,10 @@ public class AuthController(IHttpContextAccessor httpContextAccessor,
             }
         );
 
-        return Redirect(RouteConstants.ADMIN_LOGIN);
+        return Redirect(AdminRouteConstants.LOGIN);
     }
-    
-    [HttpGet(RouteConstants.ADMIN_ACCESS_DENIED)]
+
+    [HttpGet(AdminRouteConstants.ACCESS_DENIED)]
     public IActionResult AccessDenied()
     {
         return View();

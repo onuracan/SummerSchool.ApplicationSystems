@@ -5,7 +5,6 @@ using SummerSchool.ApplicationSystems.Mvc.Common.Constants;
 using SummerSchool.ApplicationSystems.Mvc.Models.OtpVerification.Response;
 using SummerSchool.ApplicationSystems.Shared.Models;
 using System.Security.Claims;
-using static SummerSchool.ApplicationSystems.Mvc.Common.Constants.RouteConstants;
 
 namespace SummerSchool.ApplicationSystems.Mvc.Controllers;
 
@@ -13,41 +12,41 @@ namespace SummerSchool.ApplicationSystems.Mvc.Controllers;
 public class AuthController(IHttpContextAccessor httpContextAccessor,
                             IHttpClientFactory httpClientFactory) : BaseController(httpContextAccessor, httpClientFactory)
 {
-    [HttpGet(RouteConstants.AUTH_LOGIN)]
+    [HttpGet(StudentRouteConstants.AUTH_LOGIN)]
     public IActionResult Login()
     {
         return View();
     }
 
     [ValidateAntiForgeryToken]
-    [HttpPost(RouteConstants.AUTH_REQUEST_OTP)]
+    [HttpPost(StudentRouteConstants.AUTH_REQUEST_OTP)]
     public async Task<JsonResult> RequestOtp([FromBody] string phoneNumber)
     {
-        var response = await this.PostApiRequestAsync<OtpVerificationResponseModel>(ApiEndpoints.AUTH_REQUEST_OTP, new { phoneNumber }).ConfigureAwait(false);
+        var response = await this.PostApiRequestAsync<OtpVerificationResponseModel>(StudentApiEndpoints.AUTH_REQUEST_OTP, new { phoneNumber }).ConfigureAwait(false);
 
         return Json(response);
     }
 
     [ValidateAntiForgeryToken]
-    [HttpPost(RouteConstants.AUTH_VERIFY_OTP)]
+    [HttpPost(StudentRouteConstants.AUTH_VERIFY_OTP)]
     public async Task<JsonResult> VerifyOtp([FromBody] string code)
     {
-        var response = await this.PostApiRequestAsync<OtpVerificationResponseModel>(ApiEndpoints.AUTH_VERIFY_OTP, code).ConfigureAwait(false);
+        var response = await this.PostApiRequestAsync<OtpVerificationResponseModel>(StudentApiEndpoints.AUTH_VERIFY_OTP, code).ConfigureAwait(false);
 
         return Json(response);
     }
 
     [ValidateAntiForgeryToken]
-    [HttpPost(RouteConstants.AUTH_LOGIN)]
+    [HttpPost(StudentRouteConstants.AUTH_LOGIN)]
     public async Task<JsonResult> Login([FromBody] string phoneNumber)
     {
-        var response = await this.PostApiRequestAsync<UserModel>(ApiEndpoints.AUTH_STUDENT_LOGIN, new { phoneNumber }).ConfigureAwait(false);
+        var response = await this.PostApiRequestAsync<UserModel>(StudentApiEndpoints.AUTH_STUDENT_LOGIN, new { phoneNumber }).ConfigureAwait(false);
         if (!response.IsSuccessful)
             return Json(response);
 
         var claims = this.GetUserClaims(response.Result);
 
-        var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationConstants.STUDENT_SCHEME);
+        var claimsIdentity = new ClaimsIdentity(claims, StudentCookieConstants.SCHEME);
 
         var properties = new AuthenticationProperties()
         {
@@ -56,20 +55,20 @@ public class AuthController(IHttpContextAccessor httpContextAccessor,
             ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(30)
         };
 
-        await HttpContext.SignInAsync(CookieAuthenticationConstants.STUDENT_SCHEME, new ClaimsPrincipal(claimsIdentity), properties);
+        await HttpContext.SignInAsync(StudentCookieConstants.SCHEME, new ClaimsPrincipal(claimsIdentity), properties);
 
         return Json(response);
     }
 
-    [HttpGet(RouteConstants.AUTH_LOGOUT)]
+    [HttpGet(StudentRouteConstants.AUTH_LOGOUT)]
     public async Task<IActionResult> Logout()
     {
-        await HttpContext.SignOutAsync(CookieAuthenticationConstants.STUDENT_SCHEME);
+        await HttpContext.SignOutAsync(StudentCookieConstants.SCHEME);
 
-        return Redirect(RouteConstants.AUTH_LOGIN);
+        return Redirect(StudentRouteConstants.AUTH_LOGIN);
     }
 
-    [HttpGet(RouteConstants.ACCESS_DENIED)]
+    [HttpGet(StudentRouteConstants.ACCESS_DENIED)]
     public IActionResult AccessDenied()
     {
         return View();

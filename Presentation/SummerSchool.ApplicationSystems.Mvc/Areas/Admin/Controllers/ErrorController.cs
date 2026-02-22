@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using SummerSchool.ApplicationSystems.Mvc.Common.Constants;
+using SummerSchool.ApplicationSystems.Mvc.Areas.Admin.Common.Constants;
 using System.Net;
 
 namespace SummerSchool.ApplicationSystems.Mvc.Areas.Admin.Controllers;
@@ -12,7 +12,7 @@ public class ErrorController(ILogger<ErrorController> logger) : Controller
 {
     private readonly ILogger<ErrorController> _logger = logger;
 
-    [HttpGet(RouteConstants.ADMIN_ERROR)]
+    [HttpGet(AdminRouteConstants.ERROR)]
     public IActionResult Handler(int statusCode)
     {
         HttpContext.Response.StatusCode = statusCode;
