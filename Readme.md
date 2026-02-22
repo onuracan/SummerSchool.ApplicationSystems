@@ -135,8 +135,7 @@ docker-compose logs -f
 # Belirli bir servisin logunu izle
 docker-compose logs -f mvc
 docker-compose logs -f webapi
-docker-compose logs -f sqlserver
-```
+
 
 **Durdurma ve temizleme:**
 ```bash
@@ -155,9 +154,6 @@ docker-compose down -v
 - **MVC Web:** http://localhost:8080
 - **Web API:** http://localhost:8081
 - **Swagger:** http://localhost:8081/swagger
-- **SQL Server:** localhost:1433
-  - Kullanıcı: `sa`
-  - Şifre: `YourStrong@Password`
 
 ### Veritabanı Migration
 
@@ -185,11 +181,6 @@ docker exec summerschool-api dotnet ef database update
 ```bash
 docker-compose ps
 docker-compose logs
-```
-
-**SQL Server bağlantı testi:**
-```bash
-docker exec -it summerschool-sqlserver /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P YourStrong@Password -Q "SELECT @@VERSION"
 ```
 
 **Container'ları yeniden build et:**

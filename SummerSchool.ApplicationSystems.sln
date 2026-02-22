@@ -1,0 +1,70 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.2.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Repository", "Repository", "{809DC6B5-E81F-0E22-2970-83A1D55AAEA1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{FBF56CC3-7AE6-AD2D-3F14-7F97FD322CD6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Service", "Service", "{226567F5-DD15-7888-5BF1-C4407778305A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{06CFFD70-14AA-A959-A3BA-1B15D094E3B1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SummerSchool.ApplicationSystems.Repository", "Repository\SummerSchool.ApplicationSystems.Repository\SummerSchool.ApplicationSystems.Repository.csproj", "{E279DD65-55FD-3D63-B100-D709EB15A7D6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SummerSchool.ApplicationSystems.Core", "Core\SummerSchool.ApplicationSystems.Core\SummerSchool.ApplicationSystems.Core.csproj", "{4A06E1E9-6CCD-785F-A715-4D35325A141E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SummerSchool.ApplicationSystems.Shared", "Core\SummerSchool.ApplicationSystems.Shared\SummerSchool.ApplicationSystems.Shared.csproj", "{2AC86F4E-1931-35EF-E4E7-29510D5DA218}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SummerSchool.ApplicationSystems.Service", "Service\SummerSchool.ApplicationSystems.Service\SummerSchool.ApplicationSystems.Service.csproj", "{B01CAC8B-FB33-730F-70A5-C1455BD96787}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SummerSchool.ApplicationSystems.Mvc", "Presentation\SummerSchool.ApplicationSystems.Mvc\SummerSchool.ApplicationSystems.Mvc.csproj", "{0E447BD7-4346-DB55-1919-C25B0EA7E732}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SummerSchool.ApplicationSystems.WebApi", "Presentation\SummerSchool.ApplicationSystems.WebApi\SummerSchool.ApplicationSystems.WebApi.csproj", "{E68D3538-D132-2684-EF60-258F771CF12E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E279DD65-55FD-3D63-B100-D709EB15A7D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E279DD65-55FD-3D63-B100-D709EB15A7D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E279DD65-55FD-3D63-B100-D709EB15A7D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E279DD65-55FD-3D63-B100-D709EB15A7D6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A06E1E9-6CCD-785F-A715-4D35325A141E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A06E1E9-6CCD-785F-A715-4D35325A141E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A06E1E9-6CCD-785F-A715-4D35325A141E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A06E1E9-6CCD-785F-A715-4D35325A141E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2AC86F4E-1931-35EF-E4E7-29510D5DA218}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2AC86F4E-1931-35EF-E4E7-29510D5DA218}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2AC86F4E-1931-35EF-E4E7-29510D5DA218}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2AC86F4E-1931-35EF-E4E7-29510D5DA218}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B01CAC8B-FB33-730F-70A5-C1455BD96787}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B01CAC8B-FB33-730F-70A5-C1455BD96787}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B01CAC8B-FB33-730F-70A5-C1455BD96787}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B01CAC8B-FB33-730F-70A5-C1455BD96787}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0E447BD7-4346-DB55-1919-C25B0EA7E732}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E447BD7-4346-DB55-1919-C25B0EA7E732}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E447BD7-4346-DB55-1919-C25B0EA7E732}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E447BD7-4346-DB55-1919-C25B0EA7E732}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E68D3538-D132-2684-EF60-258F771CF12E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E68D3538-D132-2684-EF60-258F771CF12E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E68D3538-D132-2684-EF60-258F771CF12E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E68D3538-D132-2684-EF60-258F771CF12E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E279DD65-55FD-3D63-B100-D709EB15A7D6} = {809DC6B5-E81F-0E22-2970-83A1D55AAEA1}
+		{4A06E1E9-6CCD-785F-A715-4D35325A141E} = {FBF56CC3-7AE6-AD2D-3F14-7F97FD322CD6}
+		{2AC86F4E-1931-35EF-E4E7-29510D5DA218} = {FBF56CC3-7AE6-AD2D-3F14-7F97FD322CD6}
+		{B01CAC8B-FB33-730F-70A5-C1455BD96787} = {226567F5-DD15-7888-5BF1-C4407778305A}
+		{0E447BD7-4346-DB55-1919-C25B0EA7E732} = {06CFFD70-14AA-A959-A3BA-1B15D094E3B1}
+		{E68D3538-D132-2684-EF60-258F771CF12E} = {06CFFD70-14AA-A959-A3BA-1B15D094E3B1}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9FF11F1C-A2C5-491B-9A19-D4F24DB688BF}
+	EndGlobalSection
+EndGlobal
