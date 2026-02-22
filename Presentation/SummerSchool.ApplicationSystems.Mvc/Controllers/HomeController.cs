@@ -4,6 +4,7 @@ using SummerSchool.ApplicationSystems.Mvc.Common.Constants;
 using SummerSchool.ApplicationSystems.Mvc.Models.CountryInfo.Response;
 using SummerSchool.ApplicationSystems.Mvc.Models.Home;
 using SummerSchool.ApplicationSystems.Mvc.Models.Student.Response;
+using static SummerSchool.ApplicationSystems.Mvc.Common.Constants.RouteConstants;
 
 namespace SummerSchool.ApplicationSystems.Mvc.Controllers;
 
@@ -16,7 +17,7 @@ public class HomeController(IHttpContextAccessor httpContextAccessor,
     {
         var model = new HomeViewModel();
 
-        var responseStudent = await this.GetApiRequestAsync<StudentViewModel>(ApiEndpoints.GET_STUDENT).ConfigureAwait(false);
+        var responseStudent = await this.GetApiRequestAsync<StudentViewModel>($"{ApiEndpoints.GET_STUDENT}?id={this.UserInfo.Id.ToString()}").ConfigureAwait(false);
         if (!responseStudent.IsSuccessful)
             ViewBag.Response = responseStudent;
 

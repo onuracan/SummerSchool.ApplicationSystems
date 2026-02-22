@@ -6,5 +6,5 @@ namespace SummerSchool.ApplicationSystems.Core.Services.Student;
 
 public interface IStudentQueryService : IBaseService<Entities.Student>
 {
-    Task<ServiceResponseDto<StudentResponseDto>> GetById(CancellationToken cancellationToken);
+    Task<ServiceResponseDto<StudentResponseDto>> GetByIdAsync(Guid id, CancellationToken cancellationToken);
 }

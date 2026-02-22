@@ -1,3 +1,4 @@
+using Serilog;
 using SummerSchool.ApplicationSystems.Mvc.Common.Constants;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +11,7 @@ app.Run();
 
 void ServicesSection(IServiceCollection services)
 {
+    services.AddSerilog();
     services.AddControllersWithViews();
     services.AddHttpContextAccessor();
 
@@ -54,18 +56,31 @@ void ServicesSection(IServiceCollection services)
 
 void UseSection(WebApplication app)
 {
-    if (!app.Environment.IsDevelopment())
-    {
-        app.UseExceptionHandler(RouteConstants.ERROR_500);
-        app.UseHsts();
-    }
-    else
-    {
-        app.UseDeveloperExceptionPage();
-    }
+    app.UseSerilogRequestLogging();
 
-    app.UseStatusCodePagesWithRedirects("/Error/{0}");
-    app.UseHttpsRedirection();
+    app.UseExceptionHandler(appError =>
+    {
+        appError.Run(async context =>
+        {
+            var isAdminArea = context.Request.Path.StartsWithSegments("/Admin");
+            var errorPath = isAdminArea ? "/Admin/Error/500" : "/Error/500";
+            context.Response.Redirect(errorPath);
+        });
+    });
+    app.UseStatusCodePages(async context =>
+    {
+        var isAdminArea = context.HttpContext.Request.Path.StartsWithSegments("/Admin");
+        var errorPath = isAdminArea
+            ? $"/Admin/Error/{context.HttpContext.Response.StatusCode}"
+            : $"/Error/{context.HttpContext.Response.StatusCode}";
+
+        context.HttpContext.Response.Redirect(errorPath);
+    });
+
+    if (app.Environment.IsDevelopment())
+        app.UseHsts();
+    else
+        app.UseHttpsRedirection();
     app.UseStaticFiles();
     app.UseRouting();
     app.UseAuthentication();

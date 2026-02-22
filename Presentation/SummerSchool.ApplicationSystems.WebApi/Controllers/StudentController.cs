@@ -11,7 +11,7 @@ namespace SummerSchool.ApplicationSystems.WebApi.Controllers;
 [Produces("application/json")]
 [Authorize]
 public class StudentController(IStudentQueryService studentQueryService,
-                               IStudentCommandService studentCommandService, 
+                               IStudentCommandService studentCommandService,
                                IHttpContextAccessor httpContextAccessor) : BaseController(httpContextAccessor)
 {
     private readonly IStudentQueryService _studentQueryService = studentQueryService;
@@ -20,9 +20,9 @@ public class StudentController(IStudentQueryService studentQueryService,
     [HttpGet("student")]
     [ProducesResponseType((int)HttpStatusCode.OK)]
     [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
-    public async Task<IActionResult> Get(CancellationToken cancellationToken)
+    public async Task<IActionResult> Get([FromQuery] Guid id, CancellationToken cancellationToken)
     {
-        var response = await this._studentQueryService.GetById(cancellationToken).ConfigureAwait(false);
+        var response = await this._studentQueryService.GetByIdAsync(id, cancellationToken).ConfigureAwait(false);
 
         return this.CreateJsonResponse(response);
     }

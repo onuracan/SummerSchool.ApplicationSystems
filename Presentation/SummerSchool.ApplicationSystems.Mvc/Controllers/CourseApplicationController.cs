@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using SummerSchool.ApplicationSystems.Mvc.Common.Constants;
 using SummerSchool.ApplicationSystems.Mvc.Models.CourseApplication.Response;
+using static SummerSchool.ApplicationSystems.Mvc.Common.Constants.RouteConstants;
 
 namespace SummerSchool.ApplicationSystems.Mvc.Controllers;
 

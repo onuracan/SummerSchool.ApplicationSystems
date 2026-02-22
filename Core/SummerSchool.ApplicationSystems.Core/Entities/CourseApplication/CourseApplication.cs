@@ -7,7 +7,6 @@ public class CourseApplication : BaseEntity, IUpdatedAuditing
     public Guid StudentId { get; set; }
     public Guid CourseId { get; set; }
     public int ApplicationStatus { get; set; }
-    public string ApplicationStatusDescription { get; set; }
     public string UpdatedUser { get; set; }
     public DateTime? UpdatedDate { get; set; }
 

@@ -16,7 +16,6 @@ public class CourseApplicationEntityConfiguration : IEntityTypeConfiguration<Cou
         builder.Property(x => x.StudentId).HasColumnName("STUDENT_ID").IsRequired();
         builder.Property(x => x.CourseId).HasColumnName("COURSE_ID").IsRequired();
         builder.Property(x => x.ApplicationStatus).HasColumnName("APPLICATION_STATUS").IsRequired();
-        builder.Property(x => x.ApplicationStatusDescription).HasColumnName("APPLICATION_STATUS_DESCRIPTION").HasMaxLength(300);
         builder.Property(x => x.IsActive).HasColumnName("IS_ACTIVE").IsRequired();
         builder.Property(x => x.UpdatedUser).HasColumnName("UPDATED_USER").HasMaxLength(10);
         builder.Property(x => x.UpdatedDate).HasColumnName("UPDATED_DATE");

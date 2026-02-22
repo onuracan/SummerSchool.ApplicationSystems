@@ -76,7 +76,6 @@ namespace SummerSchool.ApplicationSystems.Repository.Migrations
                     STUDENT_ID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     COURSE_ID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     APPLICATION_STATUS = table.Column<int>(type: "int", nullable: false),
-                    APPLICATION_STATUS_DESCRIPTION = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: true),
                     UPDATED_USER = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true),
                     UPDATED_DATE = table.Column<DateTime>(type: "datetime2", nullable: true),
                     IS_ACTIVE = table.Column<int>(type: "int", nullable: false)

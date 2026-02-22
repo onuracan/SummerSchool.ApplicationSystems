@@ -12,7 +12,7 @@ using SummerSchool.ApplicationSystems.Repository.Context;
 namespace SummerSchool.ApplicationSystems.Repository.Migrations
 {
     [DbContext(typeof(MainDbContext))]
-    [Migration("20260221173026_InitialCreate")]
+    [Migration("20260222083245_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -98,11 +98,6 @@ namespace SummerSchool.ApplicationSystems.Repository.Migrations
                     b.Property<int>("ApplicationStatus")
                         .HasColumnType("int")
                         .HasColumnName("APPLICATION_STATUS");
-
-                    b.Property<string>("ApplicationStatusDescription")
-                        .HasMaxLength(300)
-                        .HasColumnType("nvarchar(300)")
-                        .HasColumnName("APPLICATION_STATUS_DESCRIPTION");
 
                     b.Property<Guid>("CourseId")
                         .HasColumnType("uniqueidentifier")

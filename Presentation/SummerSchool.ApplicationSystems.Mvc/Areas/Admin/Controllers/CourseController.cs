@@ -4,14 +4,15 @@ using SummerSchool.ApplicationSystems.Mvc.Common.Constants;
 using SummerSchool.ApplicationSystems.Mvc.Models.Course.Response;
 using static SummerSchool.ApplicationSystems.Mvc.Common.Constants.RouteConstants;
 
-namespace SummerSchool.ApplicationSystems.Mvc.Controllers;
+namespace SummerSchool.ApplicationSystems.Mvc.Areas.Admin.Controllers;
 
-[Authorize(AuthenticationSchemes = CookieAuthenticationConstants.STUDENT_SCHEME)]
+[Area("Admin")]
+[Authorize(AuthenticationSchemes = CookieAuthenticationConstants.ADMIN_SCHEME)]
 public class CourseController(IHttpContextAccessor httpContextAccessor,
-                            IHttpClientFactory httpClientFactory) : BaseController(httpContextAccessor, httpClientFactory)
+                            IHttpClientFactory httpClientFactory) : BaseAdminController(httpContextAccessor, httpClientFactory)
 {
 
-    [HttpGet(RouteConstants.GET_COURSES)]
+    [HttpGet(RouteConstants.ADMIN_GET_COURSES)]
     public async Task<IActionResult> GetCourses()
     {
         var response = await this.GetApiRequestAsync<List<CourseListResponseViewModel>>(ApiEndpoints.GET_COURSES).ConfigureAwait(false);

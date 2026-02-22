@@ -29,12 +29,13 @@ public class CourseApplicationQueryService(IBaseRepository<Entities.CourseApplic
 
         var list = await query.Select(x => new CourseApplicationListResponseDto()
         {
+            Id = x.Id,
             StudentInfo = $"{x.Student.FirstName} {x.Student.LastName}",
             CourseInfo = $"{x.Course.Code} ({x.Course.Name})",
+            ApplicationStatus = x.ApplicationStatus,
             ApplicationStatusInfo = ((ApplicationStatus)x.ApplicationStatus).GetDescription(),
-            ApplicationStatusDescription = x.ApplicationStatusDescription,
             UpdatedUser = x.UpdatedUser,
-            UpdatedDate = x.UpdatedDate.Value
+            UpdatedDate = x.UpdatedDate.HasValue ? x.UpdatedDate.Value : null
         }).ToListAsync(cancellationToken).ConfigureAwait(false);
 
         return ServiceResponseDto<IEnumerable<CourseApplicationListResponseDto>>.SetSuccess(list);
@@ -52,7 +53,6 @@ public class CourseApplicationQueryService(IBaseRepository<Entities.CourseApplic
         {
             CourseInfo = $"{x.Course.Code} - {x.Course.Name}",
             ApplicationStatusInfo = ((ApplicationStatus)x.ApplicationStatus).GetDescription(),
-            ApplicationStatusDescription = x.ApplicationStatusDescription,
         }).ToListAsync(cancellationToken).ConfigureAwait(false);
 
         return ServiceResponseDto<IEnumerable<CourseApplicationListResponseDto>>.SetSuccess(list);

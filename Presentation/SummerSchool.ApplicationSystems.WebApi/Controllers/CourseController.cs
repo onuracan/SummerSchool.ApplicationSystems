@@ -27,6 +27,16 @@ public class CourseController(ICourseQueryService courseQueryService,
         return this.CreateJsonResponse(response);
     }
 
+    [HttpGet("courseDropdownList")]
+    [ProducesResponseType((int)HttpStatusCode.OK)]
+    [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
+    public async Task<IActionResult> GetCourseDropdownList(CancellationToken cancellationToken)
+    {
+        var response = await this._courseQueryService.GetCourseDropdownListAsync(cancellationToken).ConfigureAwait(false);
+
+        return this.CreateJsonResponse(response);
+    }
+
     [HttpPost("courses")]
     [ProducesResponseType((int)HttpStatusCode.OK)]
     [ProducesResponseType((int)HttpStatusCode.InternalServerError)]

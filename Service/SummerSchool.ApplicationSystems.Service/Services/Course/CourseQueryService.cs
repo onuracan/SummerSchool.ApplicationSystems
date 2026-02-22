@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using SummerSchool.ApplicationSystems.Core.DTOs.Base.Response;
 using SummerSchool.ApplicationSystems.Core.DTOs.Course.Response;
+using SummerSchool.ApplicationSystems.Core.Enums;
 using SummerSchool.ApplicationSystems.Core.Options;
 using SummerSchool.ApplicationSystems.Core.Repositories.Base;
 using SummerSchool.ApplicationSystems.Core.Services.Course;
@@ -31,10 +32,26 @@ public class CourseQueryService(IBaseRepository<Entities.Course> repository,
             Department = x.Department,
             Faculty = x.Faculty,
             Quota = x.Quota,
-            ApplicationCount = x.CourseApplications.Count,
+            ApplicationCount = x.CourseApplications.Where(x => x.ApplicationStatus == (int)ApplicationStatus.Acceptance).Count(),
             CanBeApply = x.CourseApplications.Any(x => x.StudentId == this._userOptions.Id)
         }).ToListAsync(cancellationToken).ConfigureAwait(false);
 
         return ServiceResponseDto<IEnumerable<CourseListResponseDto>>.SetSuccess(list);
+    }
+
+    public async Task<ServiceResponseDto<IEnumerable<CourseDropdownListResponseDto>>> GetCourseDropdownListAsync(CancellationToken cancellationToken)
+    {
+        var query = this._repository.GetQueryable();
+
+        if (!await query.AnyAsync().ConfigureAwait(false))
+            return ServiceResponseDto<IEnumerable<CourseDropdownListResponseDto>>.SetFail(null, StatusCodes.Status204NoContent, "Dersler bulunamadı.");
+
+        var list = await query.Select(x => new CourseDropdownListResponseDto()
+        {
+            Id = x.Id,
+            CourseInfo = $"{x.Code} - {x.Name}"
+        }).ToListAsync(cancellationToken).ConfigureAwait(false);
+
+        return ServiceResponseDto<IEnumerable<CourseDropdownListResponseDto>>.SetSuccess(list);
     }
 }

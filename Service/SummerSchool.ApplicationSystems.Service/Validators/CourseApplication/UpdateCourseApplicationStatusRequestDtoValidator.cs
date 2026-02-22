@@ -8,30 +8,8 @@ public class UpdateCourseApplicationStatusRequestDtoValidator : AbstractValidato
 {
     public UpdateCourseApplicationStatusRequestDtoValidator()
     {
-        RuleFor(x => x.Id)
-            .NotEmpty()
-            .WithMessage("Başvuru ID boş olamaz.")
-            .NotEqual(Guid.Empty)
-            .WithMessage("Geçerli bir başvuru ID giriniz.");
-
         RuleFor(x => x.ApplicationStatus)
             .NotEmpty()
-            .WithMessage("Başvuru durumu zorunludur.")
-            .IsInEnum()
             .WithMessage("Geçerli bir başvuru durumu seçiniz. (1: Başvuruldu, 2: Kabul Edildi, 3: Reddedildi)");
-        When(x => x.ApplicationStatus == (int)ApplicationStatus.Rejection, () =>
-        {
-            RuleFor(x => x.ApplicationStatusDescription)
-                .NotEmpty()
-                .WithMessage("Başvuru reddedilirken açıklama zorunludur.")
-                .MaximumLength(300)
-                .WithMessage("Açıklama en fazla 300 karakter olabilir.");
-        });
-        When(x => x.ApplicationStatus != (int)ApplicationStatus.Rejection && !string.IsNullOrEmpty(x.ApplicationStatusDescription), () =>
-        {
-            RuleFor(x => x.ApplicationStatusDescription)
-                .MaximumLength(300)
-                .WithMessage("Açıklama en fazla 300 karakter olabilir.");
-        });
     }
 }

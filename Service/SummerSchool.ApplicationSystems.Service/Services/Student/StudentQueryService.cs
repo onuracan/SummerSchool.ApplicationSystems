@@ -18,9 +18,9 @@ public class StudentQueryService(IBaseRepository<Entities.Student> repository,
     private readonly IMapper _mapper = mapper;
     private readonly UserOptions _userOptions = userOptions;
 
-    public async Task<ServiceResponseDto<StudentResponseDto>> GetById(CancellationToken cancellationToken)
+    public async Task<ServiceResponseDto<StudentResponseDto>> GetByIdAsync(Guid id, CancellationToken cancellationToken)
     {
-        var entity = await this._repository.FindAsync(this._userOptions.Id, cancellationToken).ConfigureAwait(false);
+        var entity = await this._repository.FindAsync(id, cancellationToken).ConfigureAwait(false);
         if (entity == null)
             return ServiceResponseDto<StudentResponseDto>.SetFail(null, StatusCodes.Status204NoContent, "Öğrenci bulunamadı.");
 

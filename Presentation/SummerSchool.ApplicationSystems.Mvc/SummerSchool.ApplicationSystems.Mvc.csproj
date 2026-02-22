@@ -1,24 +1,33 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
-  <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <UserSecretsId>eeeb7c2a-861f-49b0-8458-ddf3cf843e3a</UserSecretsId>
-    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
-    <DockerfileContext>..\..</DockerfileContext>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<UserSecretsId>eeeb7c2a-861f-49b0-8458-ddf3cf843e3a</UserSecretsId>
+		<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+		<DockerfileContext>..\..</DockerfileContext>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <None Include="wwwroot\js\pages\admin\auth.js" />
-  </ItemGroup>
+	<ItemGroup>
+	  <Content Remove="wwwroot\js\pages\admin\application.js" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.23.0" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.23" />
-  </ItemGroup>
+	<ItemGroup>
+		<None Include="wwwroot\js\pages\admin\application.js" />
+		<None Include="wwwroot\js\pages\admin\auth.js" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\Core\SummerSchool.ApplicationSystems.Shared\SummerSchool.ApplicationSystems.Shared.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.23.0" />
+		<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.23" />
+		<PackageReference Include="Serilog.AspNetCore" Version="8.0.3" />
+		<PackageReference Include="Serilog.Settings.Configuration" Version="8.0.4" />
+		<PackageReference Include="Serilog.Sinks.Console" Version="6.1.1" />
+		<PackageReference Include="Serilog.Sinks.File" Version="7.0.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\Core\SummerSchool.ApplicationSystems.Shared\SummerSchool.ApplicationSystems.Shared.csproj" />
+	</ItemGroup>
 
 </Project>

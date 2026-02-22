@@ -5,13 +5,14 @@ using SummerSchool.ApplicationSystems.Mvc.Areas.Admin.Models.Auth;
 using SummerSchool.ApplicationSystems.Mvc.Common.Constants;
 using SummerSchool.ApplicationSystems.Shared.Models;
 using System.Security.Claims;
+using static SummerSchool.ApplicationSystems.Mvc.Common.Constants.RouteConstants;
 
 namespace SummerSchool.ApplicationSystems.Mvc.Areas.Admin.Controllers;
 
 [Area("Admin")]
 [AllowAnonymous]
 public class AuthController(IHttpContextAccessor httpContextAccessor,
-                            IHttpClientFactory httpClientFactory) : BaseController(httpContextAccessor, httpClientFactory)
+                            IHttpClientFactory httpClientFactory) : BaseAdminController(httpContextAccessor, httpClientFactory)
 {
     [HttpGet(RouteConstants.ADMIN_LOGIN)]
     public IActionResult Login()
@@ -61,6 +62,12 @@ public class AuthController(IHttpContextAccessor httpContextAccessor,
         );
 
         return Redirect(RouteConstants.ADMIN_LOGIN);
+    }
+    
+    [HttpGet(RouteConstants.ADMIN_ACCESS_DENIED)]
+    public IActionResult AccessDenied()
+    {
+        return View();
     }
 
     public List<Claim> GetUserClaims(UserModel user)

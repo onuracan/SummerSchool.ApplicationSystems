@@ -96,11 +96,6 @@ namespace SummerSchool.ApplicationSystems.Repository.Migrations
                         .HasColumnType("int")
                         .HasColumnName("APPLICATION_STATUS");
 
-                    b.Property<string>("ApplicationStatusDescription")
-                        .HasMaxLength(300)
-                        .HasColumnType("nvarchar(300)")
-                        .HasColumnName("APPLICATION_STATUS_DESCRIPTION");
-
                     b.Property<Guid>("CourseId")
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("COURSE_ID");

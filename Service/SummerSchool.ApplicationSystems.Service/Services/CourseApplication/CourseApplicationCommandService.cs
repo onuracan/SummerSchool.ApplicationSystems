@@ -47,7 +47,6 @@ public class CourseApplicationCommandService(IBaseRepository<Entities.CourseAppl
             return ServiceResponseDto.SetFail(message: "Durumu güncellenmek istenen başvuru bulunamadı.");
 
         entity.ApplicationStatus = request.ApplicationStatus;
-        entity.ApplicationStatusDescription = request.ApplicationStatusDescription;
         entity.UpdatedUser = this._userOptions.UserName;
         entity.UpdatedDate = DateTime.Now;
 
@@ -68,7 +67,7 @@ public class CourseApplicationCommandService(IBaseRepository<Entities.CourseAppl
         }
         else
         {
-            var appCount = await this._repository.GetDbSet().CountAsync(x => x.CourseId == request.CourseId, cancellationToken).ConfigureAwait(false);
+            var appCount = await this._repository.GetDbSet().CountAsync(x => x.CourseId == request.CourseId && x.ApplicationStatus == (int)ApplicationStatus.Acceptance, cancellationToken).ConfigureAwait(false);
             if (appCount + 1 > responseCourse.Result.Quota)
                 return ServiceResponseDto.SetFail(message: "Seçilen dersin kontenjanı dolmuş.");
         }

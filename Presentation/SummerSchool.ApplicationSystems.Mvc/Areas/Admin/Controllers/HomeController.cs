@@ -1,11 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SummerSchool.ApplicationSystems.Mvc.Common.Constants;
 
 namespace SummerSchool.ApplicationSystems.Mvc.Areas.Admin.Controllers;
 
+[Area("Admin")]
+[Authorize(AuthenticationSchemes = CookieAuthenticationConstants.ADMIN_SCHEME)]
 public class HomeController(IHttpContextAccessor httpContextAccessor,
-                            IHttpClientFactory httpClientFactory) 
-    : BaseAdminController(httpContextAccessor, httpClientFactory)
+                            IHttpClientFactory httpClientFactory) : BaseAdminController(httpContextAccessor, httpClientFactory)
 {
     [HttpGet(RouteConstants.ADMIN_INDEX)]
     public IActionResult Index()

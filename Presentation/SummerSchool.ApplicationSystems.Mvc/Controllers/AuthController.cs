@@ -5,6 +5,7 @@ using SummerSchool.ApplicationSystems.Mvc.Common.Constants;
 using SummerSchool.ApplicationSystems.Mvc.Models.OtpVerification.Response;
 using SummerSchool.ApplicationSystems.Shared.Models;
 using System.Security.Claims;
+using static SummerSchool.ApplicationSystems.Mvc.Common.Constants.RouteConstants;
 
 namespace SummerSchool.ApplicationSystems.Mvc.Controllers;
 
@@ -66,6 +67,12 @@ public class AuthController(IHttpContextAccessor httpContextAccessor,
         await HttpContext.SignOutAsync(CookieAuthenticationConstants.STUDENT_SCHEME);
 
         return Redirect(RouteConstants.AUTH_LOGIN);
+    }
+
+    [HttpGet(RouteConstants.ACCESS_DENIED)]
+    public IActionResult AccessDenied()
+    {
+        return View();
     }
 
     public List<Claim> GetUserClaims(UserModel user)

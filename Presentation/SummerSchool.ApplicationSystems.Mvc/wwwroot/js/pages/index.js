@@ -50,7 +50,8 @@ function savePersonelInformation() {
         response = ajaxPostWithResponse(apiUrl, JSON.stringify(requestData), 'json', false, null, getDefaultAjaxHeaders());
 
         if (response.IsSuccessful) {
-            messageBox("Kişisel bilgileriniz başarıyla kaydedildi!");
+            messageBox("Kişisel bilgileriniz başarıyla kaydedildi! Sisteme bilgileriniz güncel görünmesi açısından lütfen tekrar giriş yapınız.");
+            redirectLogout();
         } else {
             messageBoxError(response.Message || "Bilgiler kaydedilirken bir hata oluştu.");
         }
@@ -73,7 +74,8 @@ function savePersonelInformation() {
         response = ajaxPutWithResponse(apiUrl, JSON.stringify(requestData), 'json', false, null, getDefaultAjaxHeaders());
 
         if (response.IsSuccessful) {
-            messageBox("Kişisel bilgileriniz başarıyla güncellendi!");
+            messageBox("Kişisel bilgileriniz başarıyla güncellendi! Sisteme bilgileriniz güncel görünmesi açısından lütfen tekrar giriş yapınız.");
+            redirectLogout();
         } else {
             messageBoxError(response.Message || "Bilgiler güncellenirken bir hata oluştu.");
         }
@@ -115,7 +117,7 @@ function getMyApplications(data, callback, settings) {
     if (!response.IsSuccessful) {
         if (response.StatusCode == 204)
             messageBoxWarning(response.Message);
-        else
+        else if (response.StatusCode == 500)
             messageBoxError(response.Message);
     }
 
@@ -147,11 +149,16 @@ let courseGridColumns = [
 
             return val;
         }
-    },
+    }
 ];
 
 let myApplicationsGridColumns = [
-    { data: 'courseInfo'},
-    { data: 'applicationStatusInfo' },
-    { data: 'applicationStatusDescription' }
+    { data: 'courseInfo' },
+    { data: 'applicationStatusInfo' }
 ];
+
+function redirectLogout() {
+    setTimeout(() => {
+        window.location.href = '/Auth/Logout';
+    }, 1000);
+}
