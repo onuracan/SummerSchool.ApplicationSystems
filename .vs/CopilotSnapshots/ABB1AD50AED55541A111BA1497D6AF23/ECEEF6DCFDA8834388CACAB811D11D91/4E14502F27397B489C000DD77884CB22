@@ -1,7 +1,0 @@
-﻿namespace SummerSchool.ApplicationSystems.Mvc.Common.Constants;
-
-public static class CookieAuthenticationConstants
-{
-    public const string STUDENT_SCHEME = "StudentScheme";
-    public const string ADMIN_SCHEME = "AdminScheme";
-}

@@ -1,4 +1,0 @@
-﻿@using SummerSchool.ApplicationSystems.Mvc
-@using SummerSchool.ApplicationSystems.Mvc.Models
-@using SummerSchool.ApplicationSystems.Mvc.Common.Constants
-@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
