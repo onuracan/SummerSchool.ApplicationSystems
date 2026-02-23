@@ -1,0 +1,65 @@
+﻿namespace SummerSchool.ApplicationSystems.Mvc.Common.Constants;
+
+public static class CookieAuthenticationConstants
+{
+    public const string STUDENT_SCHEME = "StudentScheme";
+    public const string ADMIN_SCHEME = "AdminScheme";
+
+    public const string STUDENT_COOKIE_NAME = "StudentAuthCookie";
+    public const string ADMIN_COOKIE_NAME = "AdminAuthCookie";
+}
+
+public static class RouteConstants
+{
+    // Auth Routes
+    public const string AUTH_LOGIN = "/Auth/Login";
+    public const string AUTH_LOGOUT = "/Auth/Logout";
+    public const string AUTH_REQUEST_OTP = "/Auth/RequestOtp";
+    public const string AUTH_VERIFY_OTP = "/Auth/VerifyOtp";
+
+    // Admin Routes
+    public const string ADMIN_LOGIN = "/Admin/Auth/Login";
+    public const string ADMIN_LOGOUT = "/Admin/Auth/Logout";
+    public const string ADMIN_ACCESS_DENIED = "/Admin/AccessDenied";
+
+    // Student Routes
+    public const string STUDENT_INDEX = "/Student/Index";
+
+    // Home Routes
+    public const string HOME_INDEX = "/Home/Index";
+
+    // Error Routes
+    public const string ACCESS_DENIED = "/AccessDenied";
+    public const string ERROR_404 = "/Error/404";
+    public const string ERROR_500 = "/Error/500";
+}
+
+public static class ApiEndpoints
+{
+    // Auth Endpoints
+    public const string AUTH_REQUEST_OTP = "api/auth/request-otp";
+    public const string AUTH_VERIFY_OTP = "api/auth/verify-otp";
+    public const string AUTH_STUDENT_LOGIN = "api/auth/student-login";
+    public const string AUTH_ADMIN_LOGIN = "api/auth/admin-login";
+
+    // Course Endpoints
+    public const string COURSES = "api/courses";
+    public const string COURSE_BY_ID = "api/courses/{0}";
+
+    // Application Endpoints
+    public const string COURSE_APPLICATIONS = "api/course-applications";
+    public const string MY_APPLICATIONS = "api/me/applications";
+    public const string APPLICATIONS_BY_COURSE = "api/courses/{0}/applications";
+    public const string UPDATE_APPLICATION_STATUS = "api/course-applications/{0}/status";
+}
+
+public static class HttpClientNames
+{
+    public const string API_CLIENT = "ApiClient";
+}
+
+public static class ConfigurationKeys
+{
+    public const string API_URL = "ApiUrl";
+    public const string JWT_ISSUER_SETTINGS = "JwtIssuerSettings";
+}

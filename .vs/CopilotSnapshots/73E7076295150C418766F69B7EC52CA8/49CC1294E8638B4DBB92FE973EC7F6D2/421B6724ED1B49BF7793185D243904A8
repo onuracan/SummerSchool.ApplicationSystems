@@ -1,0 +1,156 @@
+﻿/* Wrapper ve Page Wrapper genişlik ayarları */
+#wrapper {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+#page-wrapper {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    position: relative !important;
+}
+
+.wrapper-content {
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 auto !important;
+    padding-left: 30px !important;
+    padding-right: 30px !important;
+}
+
+.container-fluid {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+}
+
+/* Row düzenlemeleri */
+.row {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+
+/* Tab ve ibox container düzenlemeleri */
+.ibox {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+}
+
+.ibox-content {
+    width: 100% !important;
+    box-sizing: border-box;
+    padding: 20px !important;
+}
+
+.tabs-container {
+    width: 100% !important;
+    box-sizing: border-box;
+}
+
+.tab-content {
+    width: 100% !important;
+    box-sizing: border-box;
+    padding: 20px 0 !important;
+}
+
+.tab-pane {
+    width: 100% !important;
+    box-sizing: border-box;
+}
+
+.panel-body {
+    width: 100% !important;
+    box-sizing: border-box;
+    padding: 0 !important;
+}
+
+/* Responsive tablolar için */
+.table-responsive {
+    width: 100% !important;
+    overflow-x: auto;
+}
+
+/* DataTable pagination düzenlemeleri */
+.dataTables_wrapper {
+    width: 100% !important;
+    overflow-x: visible !important;
+}
+
+.dataTables_wrapper .dataTables_paginate {
+    white-space: nowrap !important;
+    text-align: right !important;
+    overflow: visible !important;
+    margin-top: 15px !important;
+}
+
+.dataTables_wrapper .dataTables_paginate .pagination {
+    flex-wrap: wrap !important;
+    justify-content: flex-end !important;
+    margin: 0 !important;
+}
+
+.dataTables_wrapper .dataTables_info {
+    white-space: nowrap !important;
+    padding-top: 15px !important;
+}
+
+.dataTables_wrapper .dataTables_length,
+.dataTables_wrapper .dataTables_filter {
+    margin-bottom: 15px !important;
+}
+
+.dataTables_wrapper .row {
+    width: 100% !important;
+    margin: 0 !important;
+}
+
+.dataTables_wrapper .col-sm-12 {
+    overflow-x: visible !important;
+}
+
+/* Pagination butonları için */
+.pagination {
+    margin: 0 !important;
+}
+
+.pagination .page-link {
+    padding: 0.5rem 0.75rem !important;
+    white-space: nowrap !important;
+}
+
+/* DataTable ile ilgili genel düzenlemeler */
+.dataTables-example {
+    width: 100% !important;
+}
+
+/* Responsive ekran boyutları için */
+@media (max-width: 1400px) {
+    .wrapper-content {
+        padding-left: 20px !important;
+        padding-right: 20px !important;
+    }
+}
+
+@media (max-width: 992px) {
+    .wrapper-content {
+        padding-left: 15px !important;
+        padding-right: 15px !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .wrapper-content {
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+    }
+
+    .ibox-content {
+        padding: 15px !important;
+    }
+}

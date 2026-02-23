@@ -1,0 +1,21 @@
+﻿@{
+
+}
+
+<div class="container-fluid">
+    <div class="col-12 col-md">
+        <div class="table-responsive">
+            <table id="dtMyApplications" class="table table-striped table-bordered table-hover dataTables-example">
+                <thead>
+                    <tr>
+                        <th>Ders</th>
+                        <th>Başvuru Durumu</th>
+                        <th>Başvuru Durum Açıklaması</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

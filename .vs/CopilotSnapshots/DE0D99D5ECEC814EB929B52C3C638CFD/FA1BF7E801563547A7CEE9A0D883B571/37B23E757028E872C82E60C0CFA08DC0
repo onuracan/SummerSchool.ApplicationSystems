@@ -1,0 +1,3 @@
+﻿@using SummerSchool.ApplicationSystems.Mvc
+@using SummerSchool.ApplicationSystems.Mvc.Models
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers

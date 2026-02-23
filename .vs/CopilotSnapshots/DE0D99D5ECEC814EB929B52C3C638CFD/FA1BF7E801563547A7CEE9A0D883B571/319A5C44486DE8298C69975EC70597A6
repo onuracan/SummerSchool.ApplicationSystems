@@ -1,0 +1,96 @@
+﻿namespace SummerSchool.ApplicationSystems.Mvc.Common.Constants;
+
+/// <summary>
+/// Öğrenci authentication için cookie constant'ları
+/// </summary>
+public static class StudentCookieConstants
+{
+    public const string SCHEME = "StudentScheme";
+    public const string COOKIE_NAME = "StudentAuthCookie";
+    public const string COOKIE_PATH = "/";
+}
+
+/// <summary>
+/// Öğrenci ve public area için route constant'ları
+/// </summary>
+public static class StudentRouteConstants
+{
+    // Authentication
+    public const string AUTH_LOGIN = "/Auth/Login";
+    public const string AUTH_LOGOUT = "/Auth/Logout";
+    public const string AUTH_REQUEST_OTP = "/Auth/RequestOtp";
+    public const string AUTH_VERIFY_OTP = "/Auth/VerifyOtp";
+    public const string ACCESS_DENIED = "/AccessDenied";
+
+    // Home
+    public const string HOME_INDEX = "/Home/Index";
+
+    // Student
+    public const string CREATE_STUDENT = "/Student/Create";
+    public const string UPDATE_STUDENT = "/Student/Update";
+
+    // Course
+    public const string GET_COURSES = "/Course/GetCourses";
+
+    // Course Application
+    public const string APPLY_COURSE = "/CourseApplication/Apply";
+    public const string GET_ME_APPLICATIONS = "/CourseApplication/GetMeApplications";
+
+    // Error
+    public const string ERROR = "/Error/{statusCode}";
+}
+
+/// <summary>
+/// Öğrenci için API endpoint constant'ları
+/// </summary>
+public static class StudentApiEndpoints
+{
+    // Authentication
+    public const string AUTH_REQUEST_OTP = "api/auth/request-otp";
+    public const string AUTH_VERIFY_OTP = "api/auth/verify-otp";
+    public const string AUTH_STUDENT_LOGIN = "api/auth/student-login";
+
+    // Courses
+    public const string GET_COURSES = "api/courses";
+    public const string GET_COURSE_DROPDOWNLIST = "api/courseDropdownList";
+
+    // Course Applications
+    public const string COURSE_APPLICATIONS = "api/course-applications";
+    public const string MY_APPLICATIONS = "api/me/applications";
+
+    // Student
+    public const string GET_STUDENT = "api/student";
+    public const string ADD_STUDENT = "api/students";
+    public const string UPDATE_STUDENT = "api/students/{0}";
+
+    // Countries (SOAP - Bonus)
+    public const string GET_COUNTRIES = "api/countries";
+}
+
+/// <summary>
+/// HttpClient isimlendirme constant'ları
+/// </summary>
+public static class HttpClientNames
+{
+    public const string API_CLIENT = "ApiClient";
+}
+
+/// <summary>
+/// Configuration key constant'ları
+/// </summary>
+public static class ConfigurationKeys
+{
+    public const string API_URL = "ApiUrl";
+    public const string JWT_ISSUER_SETTINGS = "JwtIssuerSettings";
+}
+
+public static class HttpClientNames
+{
+    public const string API_CLIENT = "ApiClient";
+}
+
+public static class ConfigurationKeys
+{
+    public const string API_URL = "ApiUrl";
+    public const string JWT_ISSUER_SETTINGS = "JwtIssuerSettings";
+}

@@ -1,0 +1,96 @@
+﻿/* Wrapper ve Page Wrapper genişlik ayarları */
+#wrapper {
+    width: 100% !important;
+    max-width: 100% !important;
+}
+
+#page-wrapper {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+}
+
+.wrapper-content {
+    width: 100% !important;
+    max-width: 1600px !important;
+    margin: 0 auto !important;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+}
+
+.container-fluid {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+/* Tab ve ibox container düzenlemeleri */
+.ibox {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 auto;
+}
+
+.ibox-content {
+    width: 100% !important;
+    box-sizing: border-box;
+    padding: 20px !important;
+}
+
+.tabs-container {
+    width: 100% !important;
+    box-sizing: border-box;
+}
+
+.tab-content {
+    width: 100% !important;
+    box-sizing: border-box;
+}
+
+.tab-pane {
+    width: 100% !important;
+    box-sizing: border-box;
+}
+
+.panel-body {
+    width: 100% !important;
+    box-sizing: border-box;
+    padding: 20px !important;
+}
+
+/* Responsive tablolar için */
+.table-responsive {
+    width: 100% !important;
+    overflow-x: auto;
+}
+
+/* Responsive ekran boyutları için */
+@media (max-width: 1600px) {
+    .wrapper-content {
+        max-width: 95% !important;
+    }
+}
+
+@media (max-width: 992px) {
+    .wrapper-content {
+        max-width: 100% !important;
+        padding-left: 15px !important;
+        padding-right: 15px !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .wrapper-content {
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+    }
+
+    .ibox-content {
+        padding: 15px !important;
+    }
+
+    .panel-body {
+        padding: 15px !important;
+    }
+}

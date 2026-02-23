@@ -1,0 +1,56 @@
+﻿$(document).ready(function () {
+    $('#btnSave').on('click', savePersonelInformation);
+});
+
+
+function savePersonelInformation() {
+    // Form inputlarını oku
+    let studentId = $('#hdnStudentId').val(); // Hidden field'dan Id'yi alıyoruz (eklemen gerekebilir)
+    let firstName = $('#txtFirstName').val();
+    let lastName = $('#txtLastName').val();
+    let identityNumber = $('#txtIdentityNumber').val();
+    let schoolNumber = $('#txtSchoolNumber').val();
+    let department = $('#txtDepartment').val();
+    let faculty = $('#txtFaculty').val();
+    let phoneNumber = $('#txtPhoneNumber').val();
+    let eMail = $('#txtEMail').val();
+    let countryCode = $('#drpCountryCode').val();
+
+    // Validasyon
+    if (!firstName || !lastName || !identityNumber || !schoolNumber || !department || 
+        !faculty || !phoneNumber || !eMail || !countryCode) {
+        messageBoxWarning("Lütfen tüm alanları doldurunuz.");
+        return;
+    }
+
+    // Request objesi oluştur
+    let requestData = {
+        id: studentId,
+        firstName: firstName,
+        lastName: lastName,
+        identityNumber: identityNumber,
+        schoolNumber: schoolNumber,
+        department: department,
+        faculty: faculty,
+        phoneNumber: phoneNumber,
+        eMail: eMail,
+        countryCode: countryCode
+    };
+
+    // API endpoint
+    let apiUrl = '/Home/UpdateStudent/' + studentId;
+
+    // PUT request gönder
+    var response = ajaxPutWithResponse(apiUrl, JSON.stringify(requestData), 'json', false, null, getDefaultAjaxHeaders());
+
+    if (response.IsSuccessful) {
+        messageBox("Kişisel bilgileriniz başarıyla kaydedildi!");
+
+        // Sayfayı yenile veya başka bir işlem yap
+        setTimeout(() => {
+            window.location.reload();
+        }, 1000);
+    } else {
+        messageBoxError(response.Message || "Bilgiler kaydedilirken bir hata oluştu.");
+    }
+}

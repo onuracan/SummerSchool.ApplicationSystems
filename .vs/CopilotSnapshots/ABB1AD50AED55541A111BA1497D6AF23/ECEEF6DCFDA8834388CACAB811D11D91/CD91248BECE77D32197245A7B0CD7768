@@ -1,0 +1,15 @@
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+
+namespace SummerSchool.ApplicationSystems.Mvc.Controllers;
+
+[Authorize]
+public class HomeController(IHttpContextAccessor httpContextAccessor,
+                               IHttpClientFactory httpClientFactory) : BaseController(httpContextAccessor, httpClientFactory)
+{
+    [HttpGet("/Home/Index")]
+    public IActionResult Index()
+    {
+        return View();
+    }
+}

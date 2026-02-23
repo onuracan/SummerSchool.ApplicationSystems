@@ -1,0 +1,59 @@
+﻿@using SummerSchool.ApplicationSystems.Mvc.Common.Constants
+@using SummerSchool.ApplicationSystems.Mvc.Models.Home
+
+@model HomeViewModel
+
+@{
+
+}
+
+@section Styles {
+    <link href="~/css/plugins/dataTables/datatables.min.css" rel="stylesheet">
+}
+
+@section Scripts {
+    <script src="~/js/plugins/dataTables/datatables.min.js"></script>
+    <script src="~/js/plugins/dataTables/dataTables.bootstrap4.min.js"></script>
+    <script src="~/js/pages/index.js" asp-append-version="true"></script>
+}
+
+<div class="ibox">
+    <div class="ibox-title">
+        <div class="ibox-tools" style="top:9px !important;">
+            <a href="@RouteConstants.AUTH_LOGOUT" class="btn btn-primary">Çıkış Yap</a>
+        </div>
+    </div>
+    <div class="ibox-content float-e-margins">
+        <div class="tabs-container">
+            <ul class="nav nav-tabs" role="tablist">
+                <li><a class="nav-link active" data-toggle="tab" href="#tab-1"> Kişisel Bilgilerim</a></li>
+                <li><a id="btnNewApplication" class="nav-link @(ViewBag.DisableOtherPages == false ? "disabled" : "")" data-toggle="tab" href="#tab-2">Yeni Başvuru Yap</a></li>
+                <li><a id="btnMyApplications" class="nav-link @(ViewBag.DisableOtherPages == false ? "disabled" : "")" data-toggle="tab" href="#tab-3">Başvurularım</a></li>
+            </ul>
+            <div class="tab-content">
+                <div role="tabpanel" id="tab-1" class="tab-pane active">
+                    @Html.AntiForgeryToken()
+                    <div class="panel-body">
+                        @{
+                            await Html.RenderPartialAsync("Partials/_PersonalInfomartionPartial", Model.Student);
+                        }
+                    </div>
+                </div>
+                <div role="tabpanel" id="tab-2" class="tab-pane">
+                    <div class="panel-body">
+                        @{
+                            await Html.RenderPartialAsync("Partials/_NewApplicationPartial");
+                        }
+                    </div>
+                </div>
+                <div role="tabpanel" id="tab-3" class="tab-pane">
+                    <div class="panel-body">
+                        @{
+                            await Html.RenderPartialAsync("Partials/_MyApplicationsPartial");
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

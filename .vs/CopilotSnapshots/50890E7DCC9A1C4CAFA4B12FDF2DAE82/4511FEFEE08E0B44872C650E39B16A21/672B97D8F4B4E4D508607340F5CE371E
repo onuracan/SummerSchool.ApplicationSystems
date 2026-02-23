@@ -1,0 +1,95 @@
+﻿@using SummerSchool.ApplicationSystems.Mvc.Models.Student.Response
+
+@model StudentViewModel
+
+@{
+
+}
+
+<input type="hidden" id="hdnStudentId" value="@Model.Id" />
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12 col-md">
+            <div class="form-group">
+                <label for="txtFirstName">Ad</label>
+                <input type="text" class="form-control" id="txtFirstName" name="firstName" placeholder="Ad" value="@Model.FirstName" required="">
+            </div>
+        </div>
+        <div class="col-12 col-md">
+            <div class="form-group">
+                <label for="txtLastName">Soyad</label>
+                <input type="text" class="form-control" id="txtLastName" name="lastName" placeholder="Soyad" value="@Model.LastName" required="">
+            </div>
+        </div>
+        <div class="col-12 col-md">
+            <div class="form-group">
+                <label for="txtIdentityNumber">T.C. Kimlik No</label>
+                <input type="text" class="form-control" id="txtIdentityNumber" name="identityNumber" placeholder="T.C. Kimlik No" value="@Model.IdentityNumber" required="" maxlength="11">
+            </div>
+        </div>
+        <div class="col-12 col-md">
+            <div class="form-group">
+                <label for="txtSchoolNumber">Okul Numarası</label>
+                <input type="text" class="form-control" id="txtSchoolNumber" name="schoolNumber" placeholder="Okul Numarası" value="@Model.SchoolNumber" required="">
+            </div>
+        </div>
+        <div class="col-12 col-md-3">
+            <div class="form-group">
+                <label for="txtFaculty">Fakülte</label>
+                <input type="text" class="form-control" id="txtFaculty" name="faculty" placeholder="Fakülte" value="@Model.Faculty" required="">
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12 col-md">
+            <div class="form-group">
+                <label for="txtDepartment">Bölüm</label>
+                <input type="text" class="form-control" id="txtDepartment" name="department" placeholder="Bölüm" value="@Model.Department" required="">
+            </div>
+        </div>
+        <div class="col-12 col-md-3">
+            <div class="form-group">
+                <label for="txtPhoneNumber">Telefon Numarası</label>
+                <input type="tel" class="form-control" id="txtPhoneNumber" name="phoneNumber" placeholder="Telefon Numarası" value="@Model.PhoneNumber" required="">
+            </div>
+        </div>
+        <div class="col-12 col-md-3">
+            <div class="form-group">
+                <label for="txtEMail">E-Posta</label>
+                <input type="email" class="form-control" id="txtEMail" name="eMail" placeholder="E-Posta" value="@Model.EMail" required="">
+            </div>
+        </div>
+        <div class="col-12 col-md-3">
+            <div class="form-group">
+                <label for="drpCountryCode">Ülke Kodu</label>
+                <select class="form-control" id="drpCountryCode" name="countryCode" required="">
+                    <option value="">Ülke Seçiniz</option>
+                    @foreach (var item in Model.CountryCodeAndNameList)
+                    {
+                        if (Model.CountryCode == item.CountryCode)
+                        {
+                            <option value="@item.CountryCode" selected>@item.CountryName</option>
+                        }
+                        else
+                        {
+                            <option value="@item.CountryCode">@item.CountryName</option>
+                        }
+                    }
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-3">
+            <button type="button" id="btnSave" class="btn btn-lg btn-success">Kaydet</button>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12 col-md">
+            <h3 class="text-danger"><i>Dikkat: Yeni başvuru yapabilmek ve başvurularınızı görüntüleyebilmek için lütfen kişisel bilgilerinizi kaydediniz.</i></h3>
+        </div>
+    </div>
+</div>
